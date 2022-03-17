@@ -7,23 +7,20 @@ BasicScene::BasicScene()
 
 BasicScene::~BasicScene()
 {
+	// makes sure any pointers are deleted when the scene is destroyed
 	for (auto& gameObject : m_vgGameObjects) 
-	{
 		delete gameObject;
-	}
 }
 
+// pretty much the entire setup for the scene should go in here
 void BasicScene::init(sf::RenderWindow* _window)
 {
 	this->m_RenderWindow = _window;
 	updateMousePositions(1);
 
-	// add BG first, so it renders first
 	GameObject* gBG = new GameObject;
-	//gBG->init(this->m_RenderWindow, "sourfrog.png", sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), true); //image tiling
-	//gBG->init(this->m_RenderWindow, "sourfrog.png", sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), false); //image stretched to fit a desired size
-	gBG->init(this->m_RenderWindow, this->m_RenderWindow->getSize().x, this->m_RenderWindow->getSize().y, sf::Color::Blue); // fill color bg
-	m_vgGameObjects.push_back(gBG);
+	gBG->init(this->m_RenderWindow, this->m_RenderWindow->getSize().x, this->m_RenderWindow->getSize().y, sf::Color(76, 47, 99)); // fill color bg
+	m_vgGameObjects.push_back(gBG); // add BG first, so it renders first i.e. its the bottom layer
 
 	// other objects
 	GameObject* go = new GameObject;
@@ -33,14 +30,16 @@ void BasicScene::init(sf::RenderWindow* _window)
 	m_vgGameObjects.push_back(go);
 }
 
+// updates the scene
+// - updates mouse click positions
 void BasicScene::update(float _fDeltaTime, sf::Event* event)
 {
 	switch (event->type) 
 	{
-		case sf::Event::MouseButtonReleased: // detect mouse clicks
+		case sf::Event::MouseButtonReleased: // detect mouse clicks when released
 			if (sf::Event::MouseButtonReleased && event->mouseButton.button == sf::Mouse::Left)
 			{
-				updateMousePositions(_fDeltaTime);
+				updateMousePositions(_fDeltaTime); // prevents repeat clicks too quickly
 			}
 			break;
 
@@ -49,35 +48,16 @@ void BasicScene::update(float _fDeltaTime, sf::Event* event)
 	}
 }
 
-sf::WindowHandle BasicScene::GetWindowHandle() {
-	return m_RenderWindow->getSystemHandle();
-}
-
+// draws all the drawable objects in the scene
 void BasicScene::render()
 {
-	// render gameObjects & widgets
-	// whatever is drawn last, will be the top layer
-
-	// BackGround First
-	this->m_vgGameObjects[0]->render();
-
-	// sf::RenderTexture/painting canvas/view/whatever it's called
-
-	// gameObjects
-
-	/*
-		renders BackGround first, then other objects in the order they were added
-	*/
+	// renders objects in the order they were added
 	for (auto& gameObject : m_vgGameObjects)
 	{
 		gameObject->render();
 	}
 
-	// widgets
-
-	// ui elements in widgets
-
-	// other ui elements
+	// render other sprites/shapes here
 }
 
 const char* BasicScene::getTitle() 
@@ -90,12 +70,16 @@ void BasicScene::setTitle(const char* _sceneTitle)
 	this->m_cTitle = _sceneTitle;
 }
 
+// compares doubles to see if they are the exact same value
 bool areSame(double x, double y) 
 {
 	return std::fabs(x - y) <= std::numeric_limits<double>::epsilon();
 }
 
 // stores when mousePosition Changes
+// makes sure click isnt registered multiple times
+// if it's too close in time to the previous click 
+// or it's in the exact same place
 void BasicScene::updateMousePositions(float _fDeltaTime)
 {
 	sf::Vector2i v2iTempMPW = sf::Mouse::getPosition(*this->m_RenderWindow);
@@ -104,27 +88,14 @@ void BasicScene::updateMousePositions(float _fDeltaTime)
 	float _fTimeBtwnClicks = 0.01;
 
 	if (!areSame(this->m_v2iMousePosWindow.x, v2iTempMPW.x) || _fDeltaTime > _fTimeBtwnClicks)
-	{
 		this->m_v2iMousePosWindow.x = v2iTempMPW.x;
-		std::cout << "MousePosWindow X: " << m_v2iMousePosWindow.x << std::endl;
-	}
 
 	if (!areSame(this->m_v2iMousePosWindow.y, v2iTempMPW.y) || _fDeltaTime > _fTimeBtwnClicks)
-	{
 		this->m_v2iMousePosWindow.y = v2iTempMPW.y;
-		std::cout << "MousePosWindow Y: " << m_v2iMousePosWindow.y << std::endl;
-	}
 
 	if (!areSame(this->m_v2fMousePosView.x, v2fTempMPV.x) || _fDeltaTime > _fTimeBtwnClicks)
-	{
 		this->m_v2fMousePosView.x = v2fTempMPV.x;
-		std::cout << "MousePosView X:" << m_v2fMousePosView.x << std::endl;
-	}
 
 	if (!areSame(this->m_v2fMousePosView.y, v2fTempMPV.y) || _fDeltaTime > _fTimeBtwnClicks)
-	{
 		this->m_v2fMousePosView.y = v2fTempMPV.y;
-		std::cout << "MousePosView Y:" << m_v2fMousePosView.x << std::endl;
-	}
-
 }

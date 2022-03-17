@@ -152,8 +152,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="colourdialog.cpp" />
-    <ClCompile Include="vertex_shader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicScene.h" />
@@ -166,9 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Images\sourfrog.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="fragment_shader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
