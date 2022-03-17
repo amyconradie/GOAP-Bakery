@@ -8,12 +8,11 @@ int main() {
 
 	sf::Event event;
 	Game* game = new Game();
+	Scene* current_scene = new BasicScene(); // base class pointer
 
 	game->setTitle("NEW GAME");
 	game->setWindowTitle(game->getTitle());
-	Scene* current_scene = new BasicScene(); // base class pointer
 	current_scene->init(game->getWindow());
-
 
 	/*
 		what about state switching from pause to play?
@@ -22,10 +21,8 @@ int main() {
 	// Game Loop
 	while (game->running())
 	{
-
-		// Update & Render Scene
-		game->run(current_scene, &event); // polls event inside active scene
-
+		// Update & Render Scene (polls event inside active scene)
+		game->run(current_scene, &event);
 	}
 
 	return 0;
