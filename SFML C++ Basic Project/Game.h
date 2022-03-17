@@ -9,41 +9,47 @@ class Game
 {
 private:
 
-	// Window
-	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
-
-	// Mouse Positions
-	sf::Vector2i mousePosWindow;
-	sf::Vector2f mousePosView;
-
-	sf::Clock clock;
-	const char* gameName = "Game Name";
+	sf::RenderWindow* m_RenderWindow;
+	sf::VideoMode m_VideoMode;
+	sf::Vector2u m_v2uOldWindowSize;
+	bool m_bToggle = true;
+	sf::Clock m_Clock;
+	const char* m_cTitle;
 
 	void initVariables();
 	void initWindow();
 
-
 public:
 
 	// constructors & destructors
+
 	Game();
 	~Game();
+
 
 	// accessors
 
 	const bool running();
 
-	// functions
 
-	void setWindowTitle(const char* title);
-	sf::Event pollEvents(Scene* behaviour, sf::Event* event);
-	void update(Scene* behaviour, sf::Event* event);
-	void render(Scene* behaviour);
-	void run(Scene* behaviour, sf::Event* event);
+	// important functions
+
+	sf::Event pollEvents(Scene* _scene, sf::Event* _event);
+	void update(Scene* _scene, sf::Event* _event);
+	void render(Scene* _scene);
+	void run(Scene* _scene, sf::Event* _event);
+
+
+	// other functions
+
+	sf::View calcView(sf::Vector2u _v2uWindowSize, sf::Vector2f _v2fDesignedSize);
+	void MaintainAspectRatio(bool _bRescaleWindow);
+	void toggleFullscreen();
+	void setWindowTitle(const char* _cTitle);
 	void closeWindow();
 	sf::RenderWindow* getWindow();
-	void updateMousePositions();
+	const char* getTitle();
+	void setTitle(const char* _cTitle);
 };
 
 #endif
