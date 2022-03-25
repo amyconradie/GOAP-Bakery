@@ -61,6 +61,17 @@ private:
 	sf::Vector2f m_iDisplayCase2Pos;
 	sf::Vector2f m_iDisplayCase3Pos;
 
+	// keeping track of muffins that have been made
+	bool m_bCoolingRack1Full;
+	bool m_bCoolingRack2Full;
+	bool m_bCoolingRack3Full;
+
+	int m_iDisplayCase1MuffinCount;
+	int m_iDisplayCase2MuffinCount;
+	int m_iDisplayCase3MuffinCount;
+
+	float decreaseMuffinsTimer = 0.f;
+	float performNextTaskTimer = 0.f;
 
 	// names of smaller tasks
 
@@ -178,6 +189,16 @@ public:
 	void PlaceMuffinsInDisplayCase1();
 	void PlaceMuffinsInDisplayCase2();
 	void PlaceMuffinsInDisplayCase3();
+
+	void DecreaseMuffins();
+
+	void RemoveAMuffinFromDisplayCase1();
+	void RemoveAMuffinFromDisplayCase2();
+	void RemoveAMuffinFromDisplayCase3();
+
+	void UpdateDisplayCase1();
+	void UpdateDisplayCase2();
+	void UpdateDisplayCase3();
 	
 	void PlaceMuffinsOnCoolingRack1();
 	void PlaceMuffinsOnCoolingRack2();
@@ -186,6 +207,8 @@ public:
 	void RemoveMuffinsFromCoolingRack1();
 	void RemoveMuffinsFromCoolingRack2();
 	void RemoveMuffinsFromCoolingRack3();
+
+	void UpdateCoolingRack();
 
 	void UpdateText();
 	void UpdateTasks();

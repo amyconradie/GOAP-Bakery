@@ -234,6 +234,14 @@ void BakeryScene::init(sf::RenderWindow* _window, sf::VideoMode* _videoMode)
 
 	this->m_MuffinRecipe = new MuffinRecipe();
 
+	this->m_bCoolingRack1Full = false;
+	this->m_bCoolingRack2Full = false;
+	this->m_bCoolingRack3Full = false;
+
+	this->m_iDisplayCase1MuffinCount = 0;
+	this->m_iDisplayCase2MuffinCount = 0;
+	this->m_iDisplayCase3MuffinCount = 0;
+
 	UpdateRecipe();
 }
 
@@ -327,13 +335,22 @@ void BakeryScene::update(float _fDeltaTime, sf::Event* _event)
 			break;
 		}
 	}
+	
+	UpdateText();
 
+	performNextTaskTimer += _fDeltaTime;
+	decreaseMuffinsTimer += _fDeltaTime;
 
-	if (_fDeltaTime > 0.01) 
+	if (performNextTaskTimer > 0.5f)
 	{
-		UpdateText();
 		Sleep(500);
 		UpdateTasks();
+		performNextTaskTimer = 0;
+
+		if (decreaseMuffinsTimer > 1.f) {
+			DecreaseMuffins();
+			decreaseMuffinsTimer = 0;
+		}
 	}
 }
 
@@ -749,50 +766,238 @@ void BakeryScene::MoveToSink()
 
 void BakeryScene::PlaceMuffinsInDisplayCase1()
 {
-	this->gBaker->setPosition(this->m_iDisplayCase1Pos);
+	//this->gBaker->setPosition(this->m_iDisplayCase1Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_1;
+	m_iDisplayCase1MuffinCount = 6;
+	UpdateDisplayCase1();
 }
 
 void BakeryScene::PlaceMuffinsInDisplayCase2()
 {
-	this->gBaker->setPosition(this->m_iDisplayCase2Pos);
+	//this->gBaker->setPosition(this->m_iDisplayCase2Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_2;
+	m_iDisplayCase2MuffinCount = 6;
+	UpdateDisplayCase2();
 }
 
 void BakeryScene::PlaceMuffinsInDisplayCase3()
 {
-	this->gBaker->setPosition(this->m_iDisplayCase3Pos);
+	//this->gBaker->setPosition(this->m_iDisplayCase3Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_3;
+	m_iDisplayCase3MuffinCount = 6;
+	UpdateDisplayCase3();
+}
+
+void BakeryScene::DecreaseMuffins() 
+{
+	srand(time(NULL));
+	int randNum = (rand() % 3) + 1;
+
+	if (randNum == 1) 
+	{
+		RemoveAMuffinFromDisplayCase1();
+	}
+
+	if (randNum == 2) 
+	{
+		RemoveAMuffinFromDisplayCase2();
+	}
+
+	if (randNum == 3) 
+	{
+		RemoveAMuffinFromDisplayCase3();
+	}
+}
+
+void BakeryScene::RemoveAMuffinFromDisplayCase1()
+{
+	//this->gBaker->setPosition(this->m_iDisplayCase1Pos);
+	this->m_sCurrentTask = m_c_place_muffins_in_display_case_1;
+	if (m_iDisplayCase1MuffinCount >= 0) {
+		m_iDisplayCase1MuffinCount -= 1;
+		std::cout << "number of muffins in display: " << m_iDisplayCase1MuffinCount << std::endl;
+	}
+	UpdateDisplayCase1();
+}
+
+void BakeryScene::RemoveAMuffinFromDisplayCase2()
+{
+	//this->gBaker->setPosition(this->m_iDisplayCase2Pos);
+	this->m_sCurrentTask = m_c_place_muffins_in_display_case_2;
+	if (m_iDisplayCase2MuffinCount >= 0) {
+		m_iDisplayCase2MuffinCount - 1;
+	}
+	UpdateDisplayCase2();
+}
+
+void BakeryScene::RemoveAMuffinFromDisplayCase3()
+{
+	//this->gBaker->setPosition(this->m_iDisplayCase3Pos);
+	this->m_sCurrentTask = m_c_place_muffins_in_display_case_3;
+	if (m_iDisplayCase3MuffinCount > 0) {
+		m_iDisplayCase3MuffinCount -= 1;
+	}
+	UpdateDisplayCase3();
+}
+
+void BakeryScene::UpdateDisplayCase1()
+{
+	switch (m_iDisplayCase1MuffinCount)
+	{
+	case 0:
+		gDisplayCase1->setTexture("Images\\empty_display.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 1:
+		gDisplayCase1->setTexture("Images\\display_1_muffin.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 2:
+		gDisplayCase1->setTexture("Images\\display_2_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 3:
+		gDisplayCase1->setTexture("Images\\display_3_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 4:
+		gDisplayCase1->setTexture("Images\\display_4_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 5:
+		gDisplayCase1->setTexture("Images\\display_5_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 6:
+		gDisplayCase1->setTexture("Images\\display_6_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	default:
+		break;
+	}
+}
+
+void BakeryScene::UpdateDisplayCase2()
+{
+	switch (m_iDisplayCase2MuffinCount)
+	{
+	case 0:
+		gDisplayCase2->setTexture("Images\\empty_display.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 1:
+		gDisplayCase2->setTexture("Images\\display_1_muffin.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 2:
+		gDisplayCase2->setTexture("Images\\display_2_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 3:
+		gDisplayCase2->setTexture("Images\\display_3_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 4:
+		gDisplayCase2->setTexture("Images\\display_4_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 5:
+		gDisplayCase2->setTexture("Images\\display_5_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 6:
+		gDisplayCase2->setTexture("Images\\display_6_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	default:
+		break;
+	}
+}
+
+void BakeryScene::UpdateDisplayCase3()
+{
+	switch (m_iDisplayCase3MuffinCount)
+	{
+	case 0:
+		gDisplayCase3->setTexture("Images\\empty_display.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 1:
+		gDisplayCase3->setTexture("Images\\display_1_muffin.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 2:
+		gDisplayCase3->setTexture("Images\\display_2_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 3:
+		gDisplayCase3->setTexture("Images\\display_3_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 4:
+		gDisplayCase3->setTexture("Images\\display_4_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 5:
+		gDisplayCase3->setTexture("Images\\display_5_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	case 6:
+		gDisplayCase3->setTexture("Images\\display_6_muffins.png", this->blockWidth, this->blockHeight, false);
+		break;
+	default:
+		break;
+	}
 }
 
 void BakeryScene::PlaceMuffinsOnCoolingRack1()
 {
 	this->m_sCurrentTask = m_c_place_muffins_on_cooling_rack_1;
+	m_bCoolingRack1Full = true;
+	UpdateCoolingRack();
 }
 
 void BakeryScene::PlaceMuffinsOnCoolingRack2()
 {
 	this->m_sCurrentTask = m_c_place_muffins_on_cooling_rack_2;
+	m_bCoolingRack2Full = true;
+	UpdateCoolingRack();
 }
 
 void BakeryScene::PlaceMuffinsOnCoolingRack3()
 {
 	this->m_sCurrentTask = m_c_place_muffins_on_cooling_rack_3;
+	m_bCoolingRack3Full = true; 
+	UpdateCoolingRack();
 }
 
 void BakeryScene::RemoveMuffinsFromCoolingRack1()
 {
 	this->m_sCurrentTask = m_c_remove_muffins_from_cooling_rack_1;
+	m_bCoolingRack3Full = false;
+	UpdateCoolingRack();
 }
 
 void BakeryScene::RemoveMuffinsFromCoolingRack2()
 {
 	this->m_sCurrentTask = m_c_remove_muffins_from_cooling_rack_2;
+	m_bCoolingRack3Full = false;
+	UpdateCoolingRack();
 }
 
 void BakeryScene::RemoveMuffinsFromCoolingRack3()
 {
 	this->m_sCurrentTask = m_c_remove_muffins_from_cooling_rack_3;
+	m_bCoolingRack3Full = false;
+	UpdateCoolingRack();
+}
+
+void BakeryScene::UpdateCoolingRack()
+{
+	if (m_bCoolingRack1Full && m_bCoolingRack2Full && m_bCoolingRack3Full) {
+		gCoolRack->setTexture("Images\\rack_1_2_3.png", this->blockWidth, this->blockHeight, false);
+	}
+	else if (m_bCoolingRack1Full && m_bCoolingRack2Full) {
+		gCoolRack->setTexture("Images\\rack_1_2.png", this->blockWidth, this->blockHeight, false);
+	}
+	else if (m_bCoolingRack1Full && m_bCoolingRack3Full) {
+		gCoolRack->setTexture("Images\\rack_1_3.png", this->blockWidth, this->blockHeight, false);
+	}
+	else if (m_bCoolingRack2Full && m_bCoolingRack3Full) {
+		gCoolRack->setTexture("Images\\rack_2_3.png", this->blockWidth, this->blockHeight, false);
+	}
+	else if (m_bCoolingRack1Full) {
+		gCoolRack->setTexture("Images\\rack_1.png", this->blockWidth, this->blockHeight, false);
+	}
+	else if (m_bCoolingRack2Full) {
+		gCoolRack->setTexture("Images\\rack_2.png", this->blockWidth, this->blockHeight, false);
+	}
+	else if (m_bCoolingRack3Full) {
+		gCoolRack->setTexture("Images\\rack_3.png", this->blockWidth, this->blockHeight, false);
+	}
+	else {
+		gCoolRack->setTexture("Images\\rack.png", this->blockWidth, this->blockHeight, false);
+	}
 }
 
 void BakeryScene::UpdateText() {
