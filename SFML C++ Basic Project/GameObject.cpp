@@ -8,14 +8,14 @@ GameObject::GameObject()
 GameObject::~GameObject(){}
 
 // init for game objects using solid colours
-void GameObject::init(sf::RenderWindow* _renderWindow, unsigned int _iWidth, unsigned int _iHeight, sf::Color _color)
+void GameObject::init(sf::RenderWindow* _renderWindow, sf::Color _color, unsigned int _iWidth, unsigned int _iHeight)
 {
 	this->m_RenderWindow = _renderWindow;
-	setTexture(_iWidth, _iHeight, _color);
+	setTexture(_color, _iWidth, _iHeight);
 }
 
 // init for game objects using images
-void GameObject::init(sf::RenderWindow* _renderWindow, const char* _cFileName, unsigned int _iWidth, unsigned int _iHeight,  bool _bRepeated)
+void GameObject::init(sf::RenderWindow* _renderWindow, const char* _cFileName, unsigned int _iWidth, unsigned int _iHeight, bool _bRepeated)
 {
 	this->m_RenderWindow = _renderWindow;
 	setTexture(_cFileName, _iWidth, _iHeight, _bRepeated);
@@ -32,7 +32,7 @@ void GameObject::render()
 }
 
 // set sprite texture as fill colour
-void GameObject::setTexture(unsigned int _iWidth, unsigned int _iHeight, sf::Color _color)
+void GameObject::setTexture(sf::Color _color, unsigned int _iWidth, unsigned int _iHeight )
 {
 	this->m_iDefaultImage.create(_iWidth, _iHeight, _color); // fill
 	this->m_Texture.loadFromImage(this->m_iDefaultImage);

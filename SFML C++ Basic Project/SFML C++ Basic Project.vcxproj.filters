@@ -27,6 +27,24 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Planner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BakeryScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MuffinRecipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -44,10 +62,22 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UiElement.h">
+    <ClInclude Include="Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Widget.h">
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Planner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BakeryScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MuffinRecipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -55,5 +85,68 @@
     <Image Include="Resources\Images\sourfrog.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\baker.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\countertop.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display_shelf.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\fridge_closed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\fridge_open.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\muffin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\oven_closed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\oven_open.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\pantry_closed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\pantry_open.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_almost_empty.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_empty.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_full.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_mostly_full.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\sink_tap_off.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\sink_tap_on.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\sink_washing.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\whisk_off.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\whisk_on.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Fonts\PatuaOne-Regular.ttf" />
   </ItemGroup>
 </Project>

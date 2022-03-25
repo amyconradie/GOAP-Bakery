@@ -3,6 +3,8 @@
 
 #include "pch.h"
 #include "GameObject.h"
+#include "Action.h"
+#include "MuffinRecipe.h"
 
 class Scene
 {
@@ -15,7 +17,7 @@ public:
 
 	// important functions
 
-	virtual void init(sf::RenderWindow* _RenderWindow) = 0;
+	virtual void init(sf::RenderWindow* _RenderWindow, sf::VideoMode* _videoMode) = 0;
 	virtual void update(float dtime, sf::Event* event) = 0;
 	virtual void render() = 0;
 

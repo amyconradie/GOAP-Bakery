@@ -4,7 +4,8 @@
 #include "pch.h"
 #include "Scene.h"
 
-class BasicScene : public Scene
+class BasicScene 
+	: public Scene
 {
 private:
 

@@ -1,22 +1,19 @@
 #include "pch.h"
 #include "Game.h"
-#include "BasicScene.h"
+#include "BakeryScene.h"
 
 int main() {
 
 	std::srand(static_cast<unsigned>(time(NULL))); // init srand
 
 	sf::Event event;
+
 	Game* game = new Game();
-	Scene* current_scene = new BasicScene(); // base class pointer
+	Scene* current_scene = new BakeryScene(); // base class pointer
 
 	game->setTitle("NEW GAME");
 	game->setWindowTitle(game->getTitle());
-	current_scene->init(game->getWindow());
-
-	/*
-		what about state switching from pause to play?
-	*/
+	current_scene->init(game->getWindow(), game->getVideoMode());
 
 	// Game Loop
 	while (game->running())

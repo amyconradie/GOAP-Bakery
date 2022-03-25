@@ -148,22 +148,55 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="BakeryScene.cpp" />
     <ClCompile Include="BasicScene.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MuffinRecipe.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Planner.cpp" />
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="BakeryScene.h" />
     <ClInclude Include="BasicScene.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="UiElement.h" />
+    <ClInclude Include="MuffinRecipe.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Planner.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Widget.h" />
+    <ClInclude Include="State.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Images\baker.png" />
+    <Image Include="Images\countertop.png" />
+    <Image Include="Images\display.png" />
+    <Image Include="Images\display_shelf.png" />
+    <Image Include="Images\fridge_closed.png" />
+    <Image Include="Images\fridge_open.png" />
+    <Image Include="Images\muffin.png" />
+    <Image Include="Images\oven_closed.png" />
+    <Image Include="Images\oven_open.png" />
+    <Image Include="Images\pantry_closed.png" />
+    <Image Include="Images\pantry_open.png" />
+    <Image Include="Images\rack_almost_empty.png" />
+    <Image Include="Images\rack_empty.png" />
+    <Image Include="Images\rack_full.png" />
+    <Image Include="Images\rack_mostly_full.png" />
+    <Image Include="Images\sink_tap_off.png" />
+    <Image Include="Images\sink_tap_on.png" />
+    <Image Include="Images\sink_washing.png" />
+    <Image Include="Images\whisk_off.png" />
+    <Image Include="Images\whisk_on.png" />
     <Image Include="Resources\Images\sourfrog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Fonts\PatuaOne-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
