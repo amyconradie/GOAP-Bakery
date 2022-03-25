@@ -150,7 +150,6 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="BakeryScene.cpp" />
-    <ClCompile Include="BasicScene.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -162,7 +161,6 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="BakeryScene.h" />
-    <ClInclude Include="BasicScene.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="MuffinRecipe.h" />
@@ -174,26 +172,34 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\baker.png" />
-    <Image Include="Images\countertop.png" />
-    <Image Include="Images\display.png" />
-    <Image Include="Images\display_shelf.png" />
+    <Image Include="Images\dark_countertop.png" />
+    <Image Include="Images\display_1_muffin.png" />
+    <Image Include="Images\display_2_muffins.png" />
+    <Image Include="Images\display_3_muffins.png" />
+    <Image Include="Images\display_4_muffins.png" />
+    <Image Include="Images\display_5_muffins.png" />
+    <Image Include="Images\display_6_muffins.png" />
+    <Image Include="Images\empty_display.png" />
     <Image Include="Images\fridge_closed.png" />
     <Image Include="Images\fridge_open.png" />
+    <Image Include="Images\light_countertop.png" />
     <Image Include="Images\muffin.png" />
     <Image Include="Images\oven_closed.png" />
     <Image Include="Images\oven_open.png" />
     <Image Include="Images\pantry_closed.png" />
     <Image Include="Images\pantry_open.png" />
-    <Image Include="Images\rack_almost_empty.png" />
-    <Image Include="Images\rack_empty.png" />
-    <Image Include="Images\rack_full.png" />
-    <Image Include="Images\rack_mostly_full.png" />
+    <Image Include="Images\rack.png" />
+    <Image Include="Images\rack_1.png" />
+    <Image Include="Images\rack_1_2.png" />
+    <Image Include="Images\rack_1_2_3.png" />
+    <Image Include="Images\rack_1_3.png" />
+    <Image Include="Images\rack_2.png" />
+    <Image Include="Images\rack_2_3.png" />
+    <Image Include="Images\rack_3.png" />
     <Image Include="Images\sink_tap_off.png" />
     <Image Include="Images\sink_tap_on.png" />
-    <Image Include="Images\sink_washing.png" />
     <Image Include="Images\whisk_off.png" />
     <Image Include="Images\whisk_on.png" />
-    <Image Include="Resources\Images\sourfrog.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Fonts\PatuaOne-Regular.ttf" />

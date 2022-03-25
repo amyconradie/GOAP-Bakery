@@ -21,9 +21,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -56,9 +53,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -82,19 +76,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\Images\sourfrog.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Images\baker.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Images\countertop.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Images\display.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Images\display_shelf.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Images\fridge_closed.png">
@@ -118,31 +100,67 @@
     <Image Include="Images\pantry_open.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Images\rack_almost_empty.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Images\rack_empty.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Images\rack_full.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Images\rack_mostly_full.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Images\sink_tap_off.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Images\sink_tap_on.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Images\sink_washing.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Images\whisk_off.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Images\whisk_on.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_1_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_1_2_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_1_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\rack_2_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\light_countertop.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\dark_countertop.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\empty_display.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display_1_muffin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display_2_muffins.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display_3_muffins.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display_4_muffins.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display_5_muffins.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\display_6_muffins.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -6,6 +6,8 @@ BakeryScene::BakeryScene()
 	this->m_VideoMode = nullptr;
 	this->m_cTitle = "";
 	this->currentWorldState = nullptr;
+	this->m_textBox = nullptr;
+	this->m_nextStepsTextBox = nullptr;
 }
 
 BakeryScene::~BakeryScene()
@@ -15,6 +17,8 @@ BakeryScene::~BakeryScene()
 		delete gameObject;
 
 	delete m_MuffinRecipe;
+	delete m_textBox;
+	delete m_nextStepsTextBox;
 }
 
 // pretty much the entire setup for the scene should go in here
@@ -79,17 +83,17 @@ void BakeryScene::init(sf::RenderWindow* _window, sf::VideoMode* _videoMode)
 	gOven = CreateGameObject("images\\oven_closed.png", false, blockWidth, blockHeight, 0, 0);
 	gOven->setPosition(
 		sf::Vector2f(
-			(a1->getSize().x - gOven->getSize().x) / 2,
-			(a1->getSize().y - gOven->getSize().y) / 2
+			0,
+			0
 		)
 	);
 
 	// add mixer
-	gMixer = CreateGameObject("images\\whisk_off.png", false, 500, 500, 0, 0);
+	gMixer = CreateGameObject("images\\whisk_off.png", false, blockWidth, blockHeight, 0, 0);
 	gMixer->setPosition(
 		sf::Vector2f(
-			blockWidth + (blockWidth - gMixer->getSize().x) / 2,
-			(blockHeight - gMixer->getSize().y) / 2
+			blockWidth,
+			0
 		)
 	);
 
@@ -97,8 +101,8 @@ void BakeryScene::init(sf::RenderWindow* _window, sf::VideoMode* _videoMode)
 	gPantry = CreateGameObject("images\\pantry_closed.png", false, blockWidth, blockHeight, 0, 0);
 	gPantry->setPosition(
 		sf::Vector2f(
-			(blockWidth * 2) + (blockWidth - gPantry->getSize().x) / 2,
-			(blockHeight - gPantry->getSize().y) / 2
+			blockWidth * 2,
+			0
 		)
 	);
 
@@ -106,8 +110,8 @@ void BakeryScene::init(sf::RenderWindow* _window, sf::VideoMode* _videoMode)
 	gSink = CreateGameObject("images\\sink_tap_off.png", false, blockWidth, blockHeight, 0, 0);
 	gSink->setPosition(
 		sf::Vector2f(
-			(blockWidth - gSink->getSize().x) / 2,
-			(blockHeight * 2) + (blockHeight - gSink->getSize().y) / 2
+			0,
+			blockHeight * 2
 		)
 	);
 
@@ -115,130 +119,156 @@ void BakeryScene::init(sf::RenderWindow* _window, sf::VideoMode* _videoMode)
 	gFridge = CreateGameObject("Images\\fridge_closed.png", false, blockWidth, blockHeight, 0, 0);
 	gFridge->setPosition(
 		sf::Vector2f(
-			blockWidth + (blockWidth - gFridge->getSize().x) / 2,
-			(blockHeight * 2) + (blockHeight - gFridge->getSize().y) / 2
+			blockWidth,
+			blockHeight * 2
 		)
 	);
 
 	// add cooling rack
-	gCoolRack = CreateGameObject("Images\\rack_empty.png", false, blockWidth, blockHeight, 0, 0);
+	gCoolRack = CreateGameObject("Images\\rack.png", false, blockWidth, blockHeight, 0, 0);
 	gCoolRack->setPosition(
 		sf::Vector2f(
-			(blockWidth * 2) + (blockWidth - gCoolRack->getSize().x) / 2,
-			(blockHeight * 2) + (blockHeight - gCoolRack->getSize().y) / 2
+			blockWidth * 2,
+			blockHeight * 2
 		)
 	);
 
 	// add displayCases
-	gDisplayCase1 = CreateGameObject("Images\\countertop.png", false, blockWidth, blockHeight, 0, 0);
+	gDisplayCase1 = CreateGameObject("Images\\empty_display.png", false, blockWidth, blockHeight, 0, 0);
 	gDisplayCase1->setPosition(
 		sf::Vector2f(
-			(blockWidth * 4) + (blockWidth - gDisplayCase1->getSize().x) / 2,
-			(blockHeight - gDisplayCase1->getSize().y) / 2
+			blockWidth * 4,
+			0
 		)
 	);
 
 	// add displayCases
-	gDisplayCase2 = CreateGameObject("Images\\countertop.png", false, blockWidth, blockHeight, 0, 0);
+	gDisplayCase2 = CreateGameObject("Images\\empty_display.png", false, blockWidth, blockHeight, 0, 0);
 	gDisplayCase2->setPosition(
 		sf::Vector2f(
-			(blockWidth * 4) + (blockWidth - gDisplayCase2->getSize().x) / 2,
-			blockHeight + (blockHeight - gDisplayCase2->getSize().y) / 2
+			blockWidth * 4,
+			blockHeight
 		)
 	);
 
 	// add displayCases
-	gDisplayCase3 = CreateGameObject("Images\\countertop.png", false, blockWidth, blockHeight, 0, 0);
+	gDisplayCase3 = CreateGameObject("Images\\empty_display.png", false, blockWidth, blockHeight, 0, 0);
 	gDisplayCase3->setPosition(
 		sf::Vector2f(
-			(blockWidth * 4) + (blockWidth - gDisplayCase3->getSize().x) / 2,
-			(blockHeight * 2) + (blockHeight - gDisplayCase3->getSize().y) / 2
+			blockWidth * 4,
+			blockHeight * 2
 		)
 	);
 
 
 	// create the agent last so it's easy to find again
-	gBaker = CreateGameObject("Images\\baker.png", false, blockWidth*0.75, blockHeight * 0.75, 0, 0);
+	gBaker = CreateGameObject("Images\\baker.png", false, blockWidth, blockHeight, blockWidth * 2, blockHeight);
 	gBaker->setPosition(
 		sf::Vector2f(
-			(width / 2) - (gBaker->getSize().x), 
-			(height / 2) - (gBaker->getSize().y)
+			blockWidth * 2,
+			blockHeight
 		)
 	);
-	//gBaker->setOriginToCenter();
 
 	// positions infront of each position
 
 	m_iOvenPos = sf::Vector2f(
-		(0) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(1 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		0,
+		1 * blockHeight
 	);
 
 	m_iMixerPos = sf::Vector2f(
-		(1 * blockWidth) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(1 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		1 * blockWidth,
+		1 * blockHeight
 	);
 
 	m_iPantryPos = sf::Vector2f(
-		(2 * blockWidth) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(1 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		2 * blockWidth,
+		1 * blockHeight
 	);
 
 	m_iSinkPos = sf::Vector2f(
-		(0) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(1 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		0,
+		1 * blockHeight
 	);
 
 	m_iFridgePos = sf::Vector2f(
-		(1 * blockWidth) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(1 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		1 * blockWidth,
+		1 * blockHeight
 	);
 
 	m_iCoolingRackPos = sf::Vector2f(
-		(2 * blockWidth) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(1 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		2 * blockWidth,
+		1 * blockHeight
 	);
 
 	m_iDisplayCase1Pos = sf::Vector2f(
-		(3 * blockWidth) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(0) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		3 * blockWidth,
+		0
 	);
 
 	m_iDisplayCase2Pos = sf::Vector2f(
-		(3 * blockWidth) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(1 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		3 * blockWidth,
+		1 * blockHeight
 	);
 
 	m_iDisplayCase3Pos = sf::Vector2f(
-		(3 * blockWidth) + ((blockWidth - gBaker->getSize().x) * 0.5),
-		(2 * blockHeight) + ((blockHeight - gBaker->getSize().y) * 0.5)
+		3 * blockWidth,
+		2 * blockHeight
 	);
 
 	sf::Font font;
 	m_font.loadFromFile("Fonts\\PatuaOne-Regular.ttf");
 
 	this->m_textBox = new sf::Text("", m_font);
-	this->m_textBox->setFont(m_font);
-	this->m_textBox->setCharacterSize(120);
+	this->m_textBox->setCharacterSize(100);
 	this->m_textBox->setStyle(sf::Text::Bold);
-	this->m_textBox->setFillColor(sf::Color(55, 55, 55));
-	this->m_textBox->setOutlineColor(sf::Color::White);
-	this->m_textBox->setOutlineThickness(5);
-	this->m_textBox->setLetterSpacing(0.2);
-	this->m_textBox->setPosition(width * 0.96 - this->m_textBox->getGlobalBounds().width, height * 0.93 - this->m_textBox->getGlobalBounds().height);
+	this->m_textBox->setFillColor(sf::Color(55, 55, 55, 150));
+	this->m_textBox->setPosition(blockWidth * 0.05, blockHeight * 0.98); // set to top-middle right
+
+	this->m_nextStepsTextBox = new sf::Text("", m_font);
+	this->m_nextStepsTextBox->setCharacterSize(40);
+	this->m_nextStepsTextBox->setStyle(sf::Text::Regular);
+	this->m_nextStepsTextBox->setFillColor(sf::Color(55, 55, 55, 80));
+	this->m_nextStepsTextBox->setPosition((blockWidth * 3) + (blockWidth * 0.05), height * 0.01); // set to top right
 
 	this->m_MuffinRecipe = new MuffinRecipe();
 
+	UpdateRecipe();
+}
+
+void BakeryScene::UpdateRecipe() {
 	this->m_vaRecipe = this->m_MuffinRecipe->GetMuffinRecipe();
 
-	std::cout << "Make Muffins:\n";
-	int i = 0;
-	for (auto& step : this->m_vaRecipe) {
-		std::cout << step.getName() << ", cost: " << step.getCost() << "\n";
-		i += step.getCost();
+	if (!this->m_vsTaskNames.empty()) {
+		this->m_vsTaskNames.clear(); // make sure to empty task names list
 	}
-	std::cout << "Total Cost: " << i << "\n";
 
+	if (!this->m_vaRecipe.empty()) {
+		this->m_sCurrentTask = this->m_vaRecipe.front().getName();
+
+		for (auto& action : this->m_vaRecipe) {
+			m_vsTaskNames.push_back(action.getName());
+		}
+
+		// so that I can have the action name show up before the action
+		Action buffer_action("", 0);
+		this->m_vaRecipe.insert(this->m_vaRecipe.begin(), buffer_action);
+
+		m_vsTaskNames.push_back("wait for next goal");
+
+		//std::cout << "Make Muffins:\n";
+		//int i = 0;
+		//for (auto& step : this->m_vaRecipe) {
+		//	std::cout << step.getName() << ", cost: " << step.getCost() << "\n";
+		//	i += step.getCost();
+		//}
+		//std::cout << "Total Cost: " << i << "\n";
+
+	}
+	else {
+		this->m_sCurrentTask = "";
+	}
 }
 
 // updates the scene
@@ -298,10 +328,11 @@ void BakeryScene::update(float _fDeltaTime, sf::Event* _event)
 		}
 	}
 
-	UpdateText();
 
 	if (_fDeltaTime > 0.01) 
 	{
+		UpdateText();
+		Sleep(500);
 		UpdateTasks();
 	}
 }
@@ -309,14 +340,16 @@ void BakeryScene::update(float _fDeltaTime, sf::Event* _event)
 // draws all the drawable objects in the scene
 void BakeryScene::render()
 {
+
 	// renders objects in the order they were added
 	for (auto& gameObject : m_vGameObjects)
 	{
 		gameObject->render();
 	}
 
-	// render other sprites/shapes here
+	// render text 
 	this->m_RenderWindow->draw(*m_textBox);
+	this->m_RenderWindow->draw(*m_nextStepsTextBox);
 }
 
 //	creates a new view with the correct size based on a given aspect ratio
@@ -602,19 +635,19 @@ void BakeryScene::TurnOvenOn()
 
 void BakeryScene::TurnSinkOff()
 {
-	gSink->setTexture("Images\\sink_off.png", this->blockWidth, this->blockHeight, false);
+	gSink->setTexture("Images\\sink_tap_off.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_turn_sink_off;
 }
 
 void BakeryScene::TurnSinkOn()
 {
-	gSink->setTexture("Images\\sink_on.png", this->blockWidth, this->blockHeight, false);
+	gSink->setTexture("Images\\sink_tap_on.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_turn_sink_on;
 }
 
 void BakeryScene::CleanMixer()
 {
-	gMixer->setTexture("Images\\whisk_off.png", 500, 500, false);
+	gMixer->setTexture("Images\\whisk_off.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_clean_mixer;
 }
 
@@ -635,13 +668,13 @@ void BakeryScene::GetPantryIngredients()
 
 void BakeryScene::MixIngredients()
 {
-	gMixer->setTexture("Images\\whisk_on.png", 500, 500, false);
+	gMixer->setTexture("Images\\whisk_on.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_mix_ingredients;
 }
 
 void BakeryScene::PourBatterIntoTray()
 {
-	gMixer->setTexture("Images\\whisk_off.png", 500, 500, false);
+	gMixer->setTexture("Images\\whisk_off.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_pour_batter_into_tray;
 }
 
@@ -764,8 +797,23 @@ void BakeryScene::RemoveMuffinsFromCoolingRack3()
 
 void BakeryScene::UpdateText() {
 
-	this->m_textBox->setString(this->m_sCurrentTask);
-	this->m_textBox->setPosition(width * 0.96 - this->m_textBox->getGlobalBounds().width, height * 0.93 - this->m_textBox->getGlobalBounds().height);
+	if (!m_vsTaskNames.empty()) {
+
+		// this will preview the next action instead of playing the current one
+		this->m_textBox->setString(std::string("action: " + this->m_vsTaskNames.front()));
+		this->m_textBox->setPosition(blockWidth * 0.05, blockHeight * 0.98); // set to top-middle right
+
+		// create the list of next steps after this task
+		int max_steps_to_show = 39 + 1;
+		int size = m_vsTaskNames.size() - 1 >= max_steps_to_show ? max_steps_to_show : m_vsTaskNames.size() - 1;
+		std::string nextSteps = "Goal: Keep Displays and Cooling Racks\n           Filled with Muffins\n\nNext Steps:";
+		for (int i = 1; i < size; i++) 
+		{
+			nextSteps += "\n" + std::to_string(i + 1) + ". " + m_vsTaskNames.at(i);
+		}
+
+		this->m_nextStepsTextBox->setString(nextSteps);
+	}
 }
 
 void BakeryScene::UpdateTasks() {
@@ -796,23 +844,24 @@ void BakeryScene::UpdateTasks() {
 		else if (temp == m_c_open_fridge){ OpenFridge(); }
 		else if (temp == m_c_open_oven){ OpenOven(); }
 		else if (temp == m_c_open_pantry){ OpenPantry(); }
-		else if (temp == m_c_place_muffins_in_display_case_1){ PlaceMuffinsInDisplayCase1(); }
-		else if (temp == m_c_place_muffins_in_display_case_2){ PlaceMuffinsInDisplayCase2(); }
-		else if (temp == m_c_place_muffins_in_display_case_3){ PlaceMuffinsInDisplayCase3(); }
-		else if (temp == m_c_place_muffins_on_cooling_rack_1){ PlaceMuffinsOnCoolingRack1(); }
-		else if (temp == m_c_place_muffins_on_cooling_rack_2){ PlaceMuffinsOnCoolingRack2(); }
-		else if (temp == m_c_place_muffins_on_cooling_rack_3){ PlaceMuffinsOnCoolingRack3(); }
+		else if (temp == m_c_place_muffins_in_display_case_1){ PlaceMuffinsInDisplayCase1(); MoveToDisplayCase1();}
+		else if (temp == m_c_place_muffins_in_display_case_2){ PlaceMuffinsInDisplayCase2(); MoveToDisplayCase2();}
+		else if (temp == m_c_place_muffins_in_display_case_3){ PlaceMuffinsInDisplayCase3(); MoveToDisplayCase3();}
+		else if (temp == m_c_place_muffins_on_cooling_rack_1){ PlaceMuffinsOnCoolingRack1(); MoveToCoolingRack();}
+		else if (temp == m_c_place_muffins_on_cooling_rack_2){ PlaceMuffinsOnCoolingRack2(); MoveToCoolingRack();}
+		else if (temp == m_c_place_muffins_on_cooling_rack_3){ PlaceMuffinsOnCoolingRack3(); MoveToCoolingRack();}
 		else if (temp == m_c_pour_batter_into_tray){ PourBatterIntoTray(); }
 		else if (temp == m_c_put_muffin_tray_into_oven){ PutMuffinTrayIntoOven(); }
 		else if (temp == m_c_remove_muffin_tray_from_oven){ RemoveMuffinTrayFromOven(); }
-		else if (temp == m_c_remove_muffins_from_cooling_rack_1){ RemoveMuffinsFromCoolingRack1(); }
-		else if (temp == m_c_remove_muffins_from_cooling_rack_2){ RemoveMuffinsFromCoolingRack2(); }
-		else if (temp == m_c_remove_muffins_from_cooling_rack_3){ RemoveMuffinsFromCoolingRack3(); }
+		else if (temp == m_c_remove_muffins_from_cooling_rack_1){ RemoveMuffinsFromCoolingRack1(); MoveToCoolingRack(); }
+		else if (temp == m_c_remove_muffins_from_cooling_rack_2){ RemoveMuffinsFromCoolingRack2(); MoveToCoolingRack(); }
+		else if (temp == m_c_remove_muffins_from_cooling_rack_3){ RemoveMuffinsFromCoolingRack3(); MoveToCoolingRack(); }
 		else if (temp == m_c_turn_oven_off){ TurnOvenOff(); }
 		else if (temp == m_c_turn_oven_on){ TurnOvenOn(); }
 		else if (temp == m_c_turn_sink_off){ TurnSinkOff(); }
 		else if (temp == m_c_turn_sink_on){ TurnSinkOn(); }
 
 		this->m_vaRecipe.erase(this->m_vaRecipe.begin());
+		this->m_vsTaskNames.erase(this->m_vsTaskNames.begin());
 	}
 }

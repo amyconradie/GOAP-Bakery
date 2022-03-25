@@ -33,6 +33,7 @@ private:
 
 	sf::Font m_font;
 	sf::Text* m_textBox;
+	sf::Text* m_nextStepsTextBox;
 
 	const char* m_cTitle;
 	bool m_bToggle = true; // for screen toggle
@@ -43,6 +44,7 @@ private:
 	unsigned int blockHeight;
 
 	std::vector<Action> m_vaRecipe;
+	std::vector<std::string> m_vsTaskNames;
 	MuffinRecipe* m_MuffinRecipe;
 	State* currentWorldState;
 	std::string m_sCurrentTask;
@@ -113,6 +115,7 @@ public:
 	//---------------------
 
 	virtual void init(sf::RenderWindow* _RenderWindow, sf::VideoMode* _videoMode);
+	void UpdateRecipe();
 	virtual void update(float _fDeltaTime, sf::Event* event);
 	virtual void render();
 
