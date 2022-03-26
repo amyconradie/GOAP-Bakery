@@ -73,50 +73,50 @@ std::vector<Action> MuffinRecipe::BasicPlan(State _initialState)
 	a_bakeMuffins.setEffect(muffin_tray_contains_muffins, true);
 	simpleActions.push_back(a_bakeMuffins);
 
-	Action a_putMuffinsOnCoolingRack1(m_cPutMuffinsOnRack1, pricey);
+	Action a_putMuffinsOnCoolingRack1(m_cPutMuffinsOnRack1, cheap);
 	a_putMuffinsOnCoolingRack1.setPrecondition(muffin_tray_contains_muffins, true);
 	a_putMuffinsOnCoolingRack1.setPrecondition(cooling_rack_1_is_full, false);
-	a_putMuffinsOnCoolingRack1.setPrecondition(cooling_rack_2_is_full, true);
-	a_putMuffinsOnCoolingRack1.setPrecondition(cooling_rack_3_is_full, true);
 	a_putMuffinsOnCoolingRack1.setEffect(muffin_tray_contains_muffins, false);
 	a_putMuffinsOnCoolingRack1.setEffect(cooling_rack_1_is_full, true);
 	simpleActions.push_back(a_putMuffinsOnCoolingRack1);
 
-	Action a_putMuffinsOnCoolingRack2(m_cPutMuffinsOnRack2, pricey);
+	Action a_putMuffinsOnCoolingRack2(m_cPutMuffinsOnRack2, cheap);
 	a_putMuffinsOnCoolingRack2.setPrecondition(muffin_tray_contains_muffins, true);
 	a_putMuffinsOnCoolingRack2.setPrecondition(cooling_rack_2_is_full, false);
-	a_putMuffinsOnCoolingRack2.setPrecondition(cooling_rack_3_is_full, true);
 	a_putMuffinsOnCoolingRack2.setEffect(muffin_tray_contains_muffins, false);
 	a_putMuffinsOnCoolingRack2.setEffect(cooling_rack_2_is_full, true);
 	simpleActions.push_back(a_putMuffinsOnCoolingRack2);
 
-	Action a_putMuffinsOnCoolingRack3(m_cPutMuffinsOnRack3, pricey);
+	Action a_putMuffinsOnCoolingRack3(m_cPutMuffinsOnRack3, cheap);
 	a_putMuffinsOnCoolingRack3.setPrecondition(muffin_tray_contains_muffins, true);
 	a_putMuffinsOnCoolingRack3.setPrecondition(cooling_rack_3_is_full, false);
 	a_putMuffinsOnCoolingRack3.setEffect(muffin_tray_contains_muffins, false);
 	a_putMuffinsOnCoolingRack3.setEffect(cooling_rack_3_is_full, true);
 	simpleActions.push_back(a_putMuffinsOnCoolingRack3);
 
-	Action a_putMuffinsInDisplayCase1FromOven(m_cPutWarmMuffinsInDisplay1, pricey);
-	a_putMuffinsInDisplayCase1FromOven.setPrecondition(muffin_tray_contains_muffins, true);
-	a_putMuffinsInDisplayCase1FromOven.setPrecondition(display_case_1_is_full, false);
-	a_putMuffinsInDisplayCase1FromOven.setEffect(muffin_tray_contains_muffins, false);
-	a_putMuffinsInDisplayCase1FromOven.setEffect(display_case_1_is_full, true);
-	simpleActions.push_back(a_putMuffinsInDisplayCase1FromOven);
 
-	Action a_putMuffinsInDisplayCase2FromOven(m_cPutWarmMuffinsInDisplay2, pricey);
-	a_putMuffinsInDisplayCase2FromOven.setPrecondition(muffin_tray_contains_muffins, true);
-	a_putMuffinsInDisplayCase2FromOven.setPrecondition(display_case_2_is_full, false);
-	a_putMuffinsInDisplayCase2FromOven.setEffect(muffin_tray_contains_muffins, false);
-	a_putMuffinsInDisplayCase2FromOven.setEffect(display_case_2_is_full, true);
-	simpleActions.push_back(a_putMuffinsInDisplayCase2FromOven);
+	//// worked before, is causing problems now?
 
-	Action a_putMuffinsInDisplayCase3FromOven(m_cPutWarmMuffinsInDisplay3, pricey);
-	a_putMuffinsInDisplayCase3FromOven.setPrecondition(muffin_tray_contains_muffins, true);
-	a_putMuffinsInDisplayCase3FromOven.setPrecondition(display_case_3_is_full, false);
-	a_putMuffinsInDisplayCase3FromOven.setEffect(muffin_tray_contains_muffins, false);
-	a_putMuffinsInDisplayCase3FromOven.setEffect(display_case_3_is_full, true);
-	simpleActions.push_back(a_putMuffinsInDisplayCase3FromOven);
+	//Action a_putMuffinsInDisplayCase1FromOven(m_cPutWarmMuffinsInDisplay1, pricey);
+	//a_putMuffinsInDisplayCase1FromOven.setPrecondition(muffin_tray_contains_muffins, true);
+	//a_putMuffinsInDisplayCase1FromOven.setPrecondition(display_case_1_is_full, false);
+	//a_putMuffinsInDisplayCase1FromOven.setEffect(muffin_tray_contains_muffins, false);
+	//a_putMuffinsInDisplayCase1FromOven.setEffect(display_case_1_is_full, true);
+	//simpleActions.push_back(a_putMuffinsInDisplayCase1FromOven);
+	//
+	//Action a_putMuffinsInDisplayCase2FromOven(m_cPutWarmMuffinsInDisplay2, pricey);
+	//a_putMuffinsInDisplayCase2FromOven.setPrecondition(muffin_tray_contains_muffins, true);
+	//a_putMuffinsInDisplayCase2FromOven.setPrecondition(display_case_2_is_full, false);
+	//a_putMuffinsInDisplayCase2FromOven.setEffect(muffin_tray_contains_muffins, false);
+	//a_putMuffinsInDisplayCase2FromOven.setEffect(display_case_2_is_full, true);
+	//simpleActions.push_back(a_putMuffinsInDisplayCase2FromOven);
+	//
+	//Action a_putMuffinsInDisplayCase3FromOven(m_cPutWarmMuffinsInDisplay3, pricey);
+	//a_putMuffinsInDisplayCase3FromOven.setPrecondition(muffin_tray_contains_muffins, true);
+	//a_putMuffinsInDisplayCase3FromOven.setPrecondition(display_case_3_is_full, false);
+	//a_putMuffinsInDisplayCase3FromOven.setEffect(muffin_tray_contains_muffins, false);
+	//a_putMuffinsInDisplayCase3FromOven.setEffect(display_case_3_is_full, true);
+	//simpleActions.push_back(a_putMuffinsInDisplayCase3FromOven);
 
 	Action a_putMuffinsInDisplayCase1FromRack1(m_cPutColdMuffinsInDisplay1FromRack1, cheap);
 	a_putMuffinsInDisplayCase1FromRack1.setPrecondition(cooling_rack_1_is_full, true);
@@ -145,35 +145,35 @@ std::vector<Action> MuffinRecipe::BasicPlan(State _initialState)
 	a_putMuffinsInDisplayCase2FromRack1.setEffect(cooling_rack_1_is_full, false);
 	a_putMuffinsInDisplayCase2FromRack1.setEffect(display_case_2_is_full, true);
 	simpleActions.push_back(a_putMuffinsInDisplayCase2FromRack1);
-
+	
 	Action a_putMuffinsInDisplayCase2FromRack2(m_cPutColdMuffinsInDisplay2FromRack2, cheap);
 	a_putMuffinsInDisplayCase2FromRack2.setPrecondition(cooling_rack_2_is_full, true);
 	a_putMuffinsInDisplayCase2FromRack2.setPrecondition(display_case_2_is_full, false);
 	a_putMuffinsInDisplayCase2FromRack2.setEffect(cooling_rack_2_is_full, false);
 	a_putMuffinsInDisplayCase2FromRack2.setEffect(display_case_2_is_full, true);
 	simpleActions.push_back(a_putMuffinsInDisplayCase2FromRack2);
-
+	
 	Action a_putMuffinsInDisplayCase2FromRack3(m_cPutColdMuffinsInDisplay2FromRack3, cheap);
 	a_putMuffinsInDisplayCase2FromRack3.setPrecondition(cooling_rack_3_is_full, true);
 	a_putMuffinsInDisplayCase2FromRack3.setPrecondition(display_case_2_is_full, false);
 	a_putMuffinsInDisplayCase2FromRack3.setEffect(cooling_rack_3_is_full, false);
 	a_putMuffinsInDisplayCase2FromRack3.setEffect(display_case_2_is_full, true);
 	simpleActions.push_back(a_putMuffinsInDisplayCase2FromRack3);
-
+	
 	Action a_putMuffinsInDisplayCase3FromRack1(m_cPutColdMuffinsInDisplay3FromRack1, cheap);
 	a_putMuffinsInDisplayCase3FromRack1.setPrecondition(cooling_rack_1_is_full, true);
 	a_putMuffinsInDisplayCase3FromRack1.setPrecondition(display_case_3_is_full, false);
 	a_putMuffinsInDisplayCase3FromRack1.setEffect(cooling_rack_1_is_full, false);
 	a_putMuffinsInDisplayCase3FromRack1.setEffect(display_case_3_is_full, true);
 	simpleActions.push_back(a_putMuffinsInDisplayCase3FromRack1);
-
+	
 	Action a_putMuffinsInDisplayCase3FromRack2(m_cPutColdMuffinsInDisplay3FromRack2, cheap);
 	a_putMuffinsInDisplayCase3FromRack2.setPrecondition(cooling_rack_2_is_full, true);
 	a_putMuffinsInDisplayCase3FromRack2.setPrecondition(display_case_3_is_full, false);
 	a_putMuffinsInDisplayCase3FromRack2.setEffect(cooling_rack_2_is_full, false);
 	a_putMuffinsInDisplayCase3FromRack2.setEffect(display_case_3_is_full, true);
 	simpleActions.push_back(a_putMuffinsInDisplayCase3FromRack2);
-
+	
 	Action a_putMuffinsInDisplayCase3FromRack3(m_cPutColdMuffinsInDisplay3FromRack3, cheap);
 	a_putMuffinsInDisplayCase3FromRack3.setPrecondition(cooling_rack_3_is_full, true);
 	a_putMuffinsInDisplayCase3FromRack3.setPrecondition(display_case_3_is_full, false);
@@ -191,21 +191,6 @@ std::vector<Action> MuffinRecipe::BasicPlan(State _initialState)
 	goalState.setVariableById(cooling_rack_3_is_full, true);
 	goalState.m_fPriorityLevel = 100;
 
-	// Starting State
-	State initial_state;
-	initial_state.setVariableById(have_muffin_batter, _initialState.getVariableById(have_muffin_batter));
-	initial_state.setVariableById(muffin_tray_contains_muffins, _initialState.getVariableById(muffin_tray_contains_muffins));
-	initial_state.setVariableById(cooling_rack_1_is_full, _initialState.getVariableById(cooling_rack_1_is_full));
-	initial_state.setVariableById(cooling_rack_2_is_full, _initialState.getVariableById(cooling_rack_2_is_full));
-	initial_state.setVariableById(cooling_rack_3_is_full, _initialState.getVariableById(cooling_rack_3_is_full));
-	initial_state.setVariableById(display_case_1_is_full, _initialState.getVariableById(display_case_1_is_full));
-	initial_state.setVariableById(display_case_2_is_full, _initialState.getVariableById(display_case_2_is_full));
-	initial_state.setVariableById(display_case_3_is_full, _initialState.getVariableById(display_case_3_is_full));
-
-
-	//std::cout << "working fine at 13\n";
-
-
 	// A*
 	Planner aStarPlanner;
 	try {
@@ -217,6 +202,11 @@ std::vector<Action> MuffinRecipe::BasicPlan(State _initialState)
 		for (std::vector<Action>::reverse_iterator rit = the_plan.rbegin(); rit != the_plan.rend(); ++rit) {
 			auto idx = std::distance(begin(the_plan), rit.base()) - 1;
 			steps.push_back(the_plan.at(idx));
+		}
+
+		int i = 1;
+		for (auto& step : steps) {
+			std::cout << "step " << i++ << ": " << step.getName() << "\n";
 		}
 
 		return steps;
@@ -241,7 +231,12 @@ std::vector<Action> MuffinRecipe::MakeMuffinBatter(State _initialState)
 	a_moveToPantry.setEffect(atPantry, true);
 	a_moveToPantry.setEffect(atFridge, false);
 	a_moveToPantry.setEffect(atMixer, false);
+	a_moveToPantry.setEffect(atOven, false);
 	a_moveToPantry.setEffect(atSink, false);
+	a_moveToPantry.setEffect(atCoolingRack, false);
+	a_moveToPantry.setEffect(atDisplayCase1, false);
+	a_moveToPantry.setEffect(atDisplayCase2, false);
+	a_moveToPantry.setEffect(atDisplayCase3, false);
 	actions.push_back(a_moveToPantry);
 
 	Action a_moveToFridge = Action("move to fridge", pricey);
@@ -249,7 +244,12 @@ std::vector<Action> MuffinRecipe::MakeMuffinBatter(State _initialState)
 	a_moveToFridge.setEffect(atPantry, false);
 	a_moveToFridge.setEffect(atFridge, true);
 	a_moveToFridge.setEffect(atMixer, false);
+	a_moveToFridge.setEffect(atOven, false);
 	a_moveToFridge.setEffect(atSink, false);
+	a_moveToFridge.setEffect(atCoolingRack, false);
+	a_moveToFridge.setEffect(atDisplayCase1, false);
+	a_moveToFridge.setEffect(atDisplayCase2, false);
+	a_moveToFridge.setEffect(atDisplayCase3, false);
 	actions.push_back(a_moveToFridge);
 
 	Action a_moveToMixer = Action("move to mixer", pricey);
@@ -257,7 +257,12 @@ std::vector<Action> MuffinRecipe::MakeMuffinBatter(State _initialState)
 	a_moveToMixer.setEffect(atPantry, false);
 	a_moveToMixer.setEffect(atFridge, false);
 	a_moveToMixer.setEffect(atMixer, true);
+	a_moveToMixer.setEffect(atOven, false);
 	a_moveToMixer.setEffect(atSink, false);
+	a_moveToMixer.setEffect(atCoolingRack, false);
+	a_moveToMixer.setEffect(atDisplayCase1, false);
+	a_moveToMixer.setEffect(atDisplayCase2, false);
+	a_moveToMixer.setEffect(atDisplayCase3, false);
 	actions.push_back(a_moveToMixer);
 
 	Action a_moveToSink = Action("move to sink", pricey);
@@ -265,7 +270,12 @@ std::vector<Action> MuffinRecipe::MakeMuffinBatter(State _initialState)
 	a_moveToSink.setEffect(atPantry, false);
 	a_moveToSink.setEffect(atFridge, false);
 	a_moveToSink.setEffect(atMixer, false);
+	a_moveToSink.setEffect(atOven, false);
 	a_moveToSink.setEffect(atSink, true);
+	a_moveToSink.setEffect(atCoolingRack, false);
+	a_moveToSink.setEffect(atDisplayCase1, false);
+	a_moveToSink.setEffect(atDisplayCase2, false);
+	a_moveToSink.setEffect(atDisplayCase3, false);
 	actions.push_back(a_moveToSink);
 
 	// open/close actions
@@ -354,33 +364,18 @@ std::vector<Action> MuffinRecipe::MakeMuffinBatter(State _initialState)
 
 	State s_goalState;
 	s_goalState.setVariableById(have_muffin_batter, true);
-	//s_goalState.setVariableById(mixer_clean, true);
+	s_goalState.setVariableById(muffin_tray_contains_batter, false);
+	s_goalState.setVariableById(muffin_tray_contains_muffins, false);
+	s_goalState.setVariableById(hasCooledMuffins, false);
 	s_goalState.setVariableById(pantry_open, false);
 	s_goalState.setVariableById(fridge_open, false);
 	s_goalState.setVariableById(sink_on, false);
 	s_goalState.m_fPriorityLevel = 100;
 
-
-	// starting variables
-
-	State s_initialState;
-	s_initialState.setVariableById(pantry_open, _initialState.getVariableById(pantry_open));
-	s_initialState.setVariableById(fridge_open, _initialState.getVariableById(fridge_open));
-	s_initialState.setVariableById(sink_on, _initialState.getVariableById(sink_on));
-	s_initialState.setVariableById(mixer_on, _initialState.getVariableById(mixer_on));
-	s_initialState.setVariableById(mixer_clean, _initialState.getVariableById(mixer_clean));
-	s_initialState.setVariableById(have_pantry_ingredients, _initialState.getVariableById(have_pantry_ingredients));
-	s_initialState.setVariableById(have_cold_ingredients, _initialState.getVariableById(have_cold_ingredients));
-	s_initialState.setVariableById(have_muffin_batter, _initialState.getVariableById(have_muffin_batter));
-	s_initialState.setVariableById(atPantry, _initialState.getVariableById(atPantry));
-	s_initialState.setVariableById(atFridge, _initialState.getVariableById(atFridge));
-	s_initialState.setVariableById(atMixer, _initialState.getVariableById(atMixer));
-	s_initialState.setVariableById(atSink, _initialState.getVariableById(atSink));
-
 	Planner aStarPlanner;
 	try
 	{
-		std::vector<Action> the_plan = aStarPlanner.plan(s_initialState, s_goalState, actions);
+		std::vector<Action> the_plan = aStarPlanner.plan(_initialState, s_goalState, actions);
 		std::vector<Action> steps;
 
 		for (std::vector<Action>::reverse_iterator rit = the_plan.rbegin(); rit != the_plan.rend(); ++rit) {
@@ -409,14 +404,28 @@ std::vector<Action> MuffinRecipe::BakeMuffinsInOven(State _initialState)
 
 	Action a_moveToOven = Action("move to oven", pricey);
 	a_moveToOven.setPrecondition(atOven, false);
+	a_moveToOven.setEffect(atPantry, false);
+	a_moveToOven.setEffect(atFridge, false);
+	a_moveToOven.setEffect(atMixer, false);
 	a_moveToOven.setEffect(atOven, true);
 	a_moveToOven.setEffect(atSink, false);
+	a_moveToOven.setEffect(atCoolingRack, false);
+	a_moveToOven.setEffect(atDisplayCase1, false);
+	a_moveToOven.setEffect(atDisplayCase2, false);
+	a_moveToOven.setEffect(atDisplayCase3, false);
 	actions.push_back(a_moveToOven);
 
 	Action a_moveToSink = Action("move to sink", pricey);
 	a_moveToSink.setPrecondition(atSink, false);
+	a_moveToSink.setEffect(atPantry, false);
+	a_moveToSink.setEffect(atFridge, false);
+	a_moveToSink.setEffect(atMixer, false);
 	a_moveToSink.setEffect(atOven, false);
 	a_moveToSink.setEffect(atSink, true);
+	a_moveToSink.setEffect(atCoolingRack, false);
+	a_moveToSink.setEffect(atDisplayCase1, false);
+	a_moveToSink.setEffect(atDisplayCase2, false);
+	a_moveToSink.setEffect(atDisplayCase3, false);
 	actions.push_back(a_moveToSink);
 
 
@@ -468,6 +477,7 @@ std::vector<Action> MuffinRecipe::BakeMuffinsInOven(State _initialState)
 	a_pourIntoMuffinTray.setPrecondition(muffin_tray_clean, true);
 	a_pourIntoMuffinTray.setPrecondition(have_muffin_batter, true);
 	a_pourIntoMuffinTray.setPrecondition(muffin_tray_contains_batter, false);
+	a_pourIntoMuffinTray.setPrecondition(muffin_tray_contains_muffins, false);
 	a_pourIntoMuffinTray.setEffect(have_muffin_batter, false);
 	a_pourIntoMuffinTray.setEffect(muffin_tray_clean, false);
 	a_pourIntoMuffinTray.setEffect(muffin_tray_contains_batter, true);
@@ -511,7 +521,7 @@ std::vector<Action> MuffinRecipe::BakeMuffinsInOven(State _initialState)
 	a_cleanMuffinTray.setPrecondition(sink_on, true);
 	a_cleanMuffinTray.setPrecondition(tray_in_oven, false);
 	a_cleanMuffinTray.setPrecondition(muffin_tray_contains_muffins, false);
-	a_cleanMuffinTray.setPrecondition(muffin_tray_contains_muffins, false);
+	a_cleanMuffinTray.setPrecondition(muffin_tray_contains_batter, false);
 	a_cleanMuffinTray.setPrecondition(muffin_tray_clean, false);
 	a_cleanMuffinTray.setEffect(muffin_tray_clean, true);
 	actions.push_back(a_cleanMuffinTray);
@@ -529,26 +539,10 @@ std::vector<Action> MuffinRecipe::BakeMuffinsInOven(State _initialState)
 	s_goalState.setVariableById(oven_open, false);
 	s_goalState.m_fPriorityLevel = 100;
 
-
-	// starting variables
-
-	State s_initialState;
-	s_initialState.setVariableById(atOven, _initialState.getVariableById(atOven));
-	s_initialState.setVariableById(atSink, _initialState.getVariableById(atSink));
-	s_initialState.setVariableById(sink_on, _initialState.getVariableById(sink_on));
-	s_initialState.setVariableById(oven_open, _initialState.getVariableById(oven_open));
-	s_initialState.setVariableById(oven_on, _initialState.getVariableById(oven_on));
-	s_initialState.setVariableById(muffin_tray_clean, _initialState.getVariableById(muffin_tray_clean));
-	s_initialState.setVariableById(have_muffin_batter, _initialState.getVariableById(have_muffin_batter));
-	s_initialState.setVariableById(muffin_tray_contains_batter, _initialState.getVariableById(muffin_tray_contains_batter));
-	s_initialState.setVariableById(muffin_tray_contains_muffins, _initialState.getVariableById(muffin_tray_contains_muffins));
-	s_initialState.setVariableById(tray_in_oven, _initialState.getVariableById(tray_in_oven));
-
-
 	Planner aStarPlanner;
 	try
 	{
-		std::vector<Action> the_plan = aStarPlanner.plan(s_initialState, s_goalState, actions);
+		std::vector<Action> the_plan = aStarPlanner.plan(_initialState, s_goalState, actions);
 		std::vector<Action> steps;
 
 		for (std::vector<Action>::reverse_iterator rit = the_plan.rbegin(); rit != the_plan.rend(); ++rit) {
@@ -556,6 +550,9 @@ std::vector<Action> MuffinRecipe::BakeMuffinsInOven(State _initialState)
 			steps.push_back(the_plan.at(idx));
 		}
 
+		if (steps.empty()) {
+			std::cout << "no path found for " << cTaskName << "\n";
+		}
 		return steps;
 
 	}
@@ -593,6 +590,7 @@ std::vector<Action> MuffinRecipe::PlaceMuffinsInDisplayCaseFromRackByNum(State _
 	a_moveToCoolingRack.setEffect(atFridge, false);
 	a_moveToCoolingRack.setEffect(atMixer, false);
 	a_moveToCoolingRack.setEffect(atOven, false);
+	a_moveToCoolingRack.setEffect(atSink, false);
 	a_moveToCoolingRack.setEffect(atCoolingRack, true);
 	a_moveToCoolingRack.setEffect(atDisplayCase1, false);
 	a_moveToCoolingRack.setEffect(atDisplayCase2, false);
@@ -602,96 +600,96 @@ std::vector<Action> MuffinRecipe::PlaceMuffinsInDisplayCaseFromRackByNum(State _
 	if (_displayCaseNum == 1) {
 
 		Action a_moveToDisplayCase1 = Action("move to display case 1", pricey);
-		a_moveToDisplayCase1.setPrecondition(_atDisplayCaseNum, false);
+		a_moveToDisplayCase1.setPrecondition(atDisplayCase1, false);
 		a_moveToDisplayCase1.setEffect(atPantry, false);
 		a_moveToDisplayCase1.setEffect(atFridge, false);
 		a_moveToDisplayCase1.setEffect(atMixer, false);
 		a_moveToDisplayCase1.setEffect(atOven, false);
+		a_moveToDisplayCase1.setEffect(atSink, false);
 		a_moveToDisplayCase1.setEffect(atCoolingRack, false);
-		a_moveToDisplayCase1.setEffect(atDisplayCase1, false);
+		a_moveToDisplayCase1.setEffect(atDisplayCase1, true);
 		a_moveToDisplayCase1.setEffect(atDisplayCase2, false);
 		a_moveToDisplayCase1.setEffect(atDisplayCase3, false);
-		a_moveToDisplayCase1.setEffect(_atDisplayCaseNum, true); // will undo if it was set to false
 		actions.push_back(a_moveToDisplayCase1);
 
 		Action a_placeMuffinsInDisplayCase1 = Action("place muffins in display case 1", pricey);
-		a_placeMuffinsInDisplayCase1.setPrecondition(_atDisplayCaseNum, true);
-		a_placeMuffinsInDisplayCase1.setPrecondition(_displayCaseNumFull, false);
+		a_placeMuffinsInDisplayCase1.setPrecondition(atDisplayCase1, true);
+		a_placeMuffinsInDisplayCase1.setPrecondition(display_case_1_is_full, false);
 		a_placeMuffinsInDisplayCase1.setPrecondition(hasCooledMuffins, true);
 		a_placeMuffinsInDisplayCase1.setEffect(hasCooledMuffins, false);
-		a_placeMuffinsInDisplayCase1.setEffect(_displayCaseNumFull, true);
+		a_placeMuffinsInDisplayCase1.setEffect(display_case_1_is_full, true);
 		actions.push_back(a_placeMuffinsInDisplayCase1);
 	}
 	else if (_displayCaseNum == 2) {
 
 		Action a_moveToDisplayCase2 = Action("move to display case 2", pricey);
-		a_moveToDisplayCase2.setPrecondition(_atDisplayCaseNum, false);
+		a_moveToDisplayCase2.setPrecondition(atDisplayCase2, false);
 		a_moveToDisplayCase2.setEffect(atPantry, false);
 		a_moveToDisplayCase2.setEffect(atFridge, false);
 		a_moveToDisplayCase2.setEffect(atMixer, false);
 		a_moveToDisplayCase2.setEffect(atOven, false);
+		a_moveToDisplayCase2.setEffect(atSink, false);
 		a_moveToDisplayCase2.setEffect(atCoolingRack, false);
 		a_moveToDisplayCase2.setEffect(atDisplayCase1, false);
-		a_moveToDisplayCase2.setEffect(atDisplayCase2, false);
+		a_moveToDisplayCase2.setEffect(atDisplayCase2, true);
 		a_moveToDisplayCase2.setEffect(atDisplayCase3, false);
-		a_moveToDisplayCase2.setEffect(_atDisplayCaseNum, true); // will undo if it was set to false
 		actions.push_back(a_moveToDisplayCase2);
 
 		Action a_placeMuffinsInDisplayCase2 = Action("place muffins in display case 2", pricey);
-		a_placeMuffinsInDisplayCase2.setPrecondition(_atDisplayCaseNum, true);
-		a_placeMuffinsInDisplayCase2.setPrecondition(_displayCaseNumFull, false);
+		a_placeMuffinsInDisplayCase2.setPrecondition(atDisplayCase2, true);
+		a_placeMuffinsInDisplayCase2.setPrecondition(display_case_2_is_full, false);
 		a_placeMuffinsInDisplayCase2.setPrecondition(hasCooledMuffins, true);
 		a_placeMuffinsInDisplayCase2.setEffect(hasCooledMuffins, false);
-		a_placeMuffinsInDisplayCase2.setEffect(_displayCaseNumFull, true);
+		a_placeMuffinsInDisplayCase2.setEffect(display_case_2_is_full, true);
 		actions.push_back(a_placeMuffinsInDisplayCase2);
 	}
 	else if (_displayCaseNum == 3) {
 
 		Action a_moveToDisplayCase3 = Action("move to display case 3", pricey);
-		a_moveToDisplayCase3.setPrecondition(_atDisplayCaseNum, false);
+		a_moveToDisplayCase3.setPrecondition(atDisplayCase3, false);
 		a_moveToDisplayCase3.setEffect(atPantry, false);
 		a_moveToDisplayCase3.setEffect(atFridge, false);
 		a_moveToDisplayCase3.setEffect(atMixer, false);
 		a_moveToDisplayCase3.setEffect(atOven, false);
+		a_moveToDisplayCase3.setEffect(atSink, false);
 		a_moveToDisplayCase3.setEffect(atCoolingRack, false);
 		a_moveToDisplayCase3.setEffect(atDisplayCase1, false);
 		a_moveToDisplayCase3.setEffect(atDisplayCase2, false);
-		a_moveToDisplayCase3.setEffect(atDisplayCase3, false);
-		a_moveToDisplayCase3.setEffect(_atDisplayCaseNum, true); // will undo if it was set to false
+		a_moveToDisplayCase3.setEffect(atDisplayCase3, true);
 		actions.push_back(a_moveToDisplayCase3);
 
 
 		Action a_placeMuffinsInDisplayCase3 = Action("place muffins in display case 3", pricey);
-		a_placeMuffinsInDisplayCase3.setPrecondition(_atDisplayCaseNum, true);
-		a_placeMuffinsInDisplayCase3.setPrecondition(_displayCaseNumFull, false);
+		a_placeMuffinsInDisplayCase3.setPrecondition(atDisplayCase3, true);
+		a_placeMuffinsInDisplayCase3.setPrecondition(display_case_3_is_full, false);
 		a_placeMuffinsInDisplayCase3.setPrecondition(hasCooledMuffins, true);
 		a_placeMuffinsInDisplayCase3.setEffect(hasCooledMuffins, false);
-		a_placeMuffinsInDisplayCase3.setEffect(_displayCaseNumFull, true);
+		a_placeMuffinsInDisplayCase3.setEffect(display_case_3_is_full, true);
 		actions.push_back(a_placeMuffinsInDisplayCase3);
 	}
 
 	if (_rackCaseNum == 1) {
 		Action a_removeMuffinsFromCoolingRack1 = Action("remove muffins from cooling rack 1", cheap);
 		a_removeMuffinsFromCoolingRack1.setPrecondition(atCoolingRack, true);
-		a_removeMuffinsFromCoolingRack1.setPrecondition(_coolingRackNumFull, true);
-		a_removeMuffinsFromCoolingRack1.setPrecondition(hasCooledMuffins, true);
-		a_removeMuffinsFromCoolingRack1.setEffect(_coolingRackNumFull, false);
+		a_removeMuffinsFromCoolingRack1.setPrecondition(cooling_rack_1_is_full, true);
+		a_removeMuffinsFromCoolingRack1.setEffect(hasCooledMuffins, true);
+		a_removeMuffinsFromCoolingRack1.setEffect(cooling_rack_1_is_full, false);
 		actions.push_back(a_removeMuffinsFromCoolingRack1);
 	}
 	else if (_rackCaseNum == 2) {
 		Action a_removeMuffinsFromCoolingRack2 = Action("remove muffins from cooling rack 2", cheap);
 		a_removeMuffinsFromCoolingRack2.setPrecondition(atCoolingRack, true);
-		a_removeMuffinsFromCoolingRack2.setPrecondition(_coolingRackNumFull, true);
-		a_removeMuffinsFromCoolingRack2.setPrecondition(hasCooledMuffins, true);
-		a_removeMuffinsFromCoolingRack2.setEffect(_coolingRackNumFull, false);
+		a_removeMuffinsFromCoolingRack2.setPrecondition(cooling_rack_2_is_full, true);
+		a_removeMuffinsFromCoolingRack2.setEffect(hasCooledMuffins, true);
+		a_removeMuffinsFromCoolingRack2.setEffect(cooling_rack_2_is_full, false);
 		actions.push_back(a_removeMuffinsFromCoolingRack2);
 	}
 	else if (_rackCaseNum == 3) {
 		Action a_removeMuffinsFromCoolingRack3 = Action("remove muffins from cooling rack 3", cheap);
 		a_removeMuffinsFromCoolingRack3.setPrecondition(atCoolingRack, true);
-		a_removeMuffinsFromCoolingRack3.setPrecondition(_coolingRackNumFull, true);
-		a_removeMuffinsFromCoolingRack3.setPrecondition(hasCooledMuffins, true);
-		a_removeMuffinsFromCoolingRack3.setEffect(_coolingRackNumFull, false);
+		a_removeMuffinsFromCoolingRack3.setPrecondition(cooling_rack_3_is_full, true);
+		a_removeMuffinsFromCoolingRack3.setEffect(hasCooledMuffins, true);
+		a_removeMuffinsFromCoolingRack3.setEffect(cooling_rack_3_is_full, false);
 		actions.push_back(a_removeMuffinsFromCoolingRack3);
 	}
 
@@ -699,31 +697,28 @@ std::vector<Action> MuffinRecipe::PlaceMuffinsInDisplayCaseFromRackByNum(State _
 	// variables required to meet goal
 
 	State s_goalState;
-	s_goalState.setVariableById(_displayCaseNumFull, true);
-	s_goalState.m_fPriorityLevel = 100;
 
-	// starting variables
+	if (_displayCaseNum == 1) {
+		s_goalState.setVariableById(display_case_1_is_full, true);
+		s_goalState.m_fPriorityLevel = 100;
 
-	State s_initialState;
-	s_initialState.setVariableById(muffin_tray_contains_muffins, _initialState.getVariableById(muffin_tray_contains_muffins));
-	s_initialState.setVariableById(cooling_rack_1_is_full, _initialState.getVariableById(cooling_rack_1_is_full));
-	s_initialState.setVariableById(cooling_rack_2_is_full, _initialState.getVariableById(cooling_rack_2_is_full));
-	s_initialState.setVariableById(cooling_rack_3_is_full, _initialState.getVariableById(cooling_rack_3_is_full));
-	s_initialState.setVariableById(_displayCaseNumFull, _initialState.getVariableById(_displayCaseNumFull));
-	s_initialState.setVariableById(atPantry, _initialState.getVariableById(atPantry));
-	s_initialState.setVariableById(atFridge, _initialState.getVariableById(atFridge));
-	s_initialState.setVariableById(atMixer, _initialState.getVariableById(atMixer));
-	s_initialState.setVariableById(atOven, _initialState.getVariableById(atOven));
-	s_initialState.setVariableById(atCoolingRack, _initialState.getVariableById(atCoolingRack));
-	s_initialState.setVariableById(_atDisplayCaseNum, _initialState.getVariableById(_atDisplayCaseNum));
-	s_initialState.setVariableById(hasCooledMuffins, _initialState.getVariableById(hasCooledMuffins));
+	}
+	else if (_displayCaseNum == 2) {
+		s_goalState.setVariableById(display_case_2_is_full, true);
+		s_goalState.m_fPriorityLevel = 100;
 
+	}
+	else if (_displayCaseNum == 3) {
+		s_goalState.setVariableById(display_case_3_is_full, true);
+		s_goalState.m_fPriorityLevel = 100;
+
+	}
 
 	// A* planner
 	Planner aStarPlanner;
 	try
 	{
-		std::vector<Action> the_plan = aStarPlanner.plan(s_initialState, s_goalState, actions);
+		std::vector<Action> the_plan = aStarPlanner.plan(_initialState, s_goalState, actions);
 		std::vector<Action> steps;
 
 		for (std::vector<Action>::reverse_iterator rit = the_plan.rbegin(); rit != the_plan.rend(); ++rit) {
@@ -755,11 +750,12 @@ std::vector<Action> MuffinRecipe::PutMuffinsInDisplayCaseByNumFromOven(State _in
 	if (_displayNum == 1) 
 	{
 		Action a_moveToDisplayCase1 = Action("move to display case 1", pricey);
-		a_moveToDisplayCase1.setPrecondition(_atDisplayCaseNum, false);
+		a_moveToDisplayCase1.setPrecondition(atDisplayCase1, false);
 		a_moveToDisplayCase1.setEffect(atPantry, false);
 		a_moveToDisplayCase1.setEffect(atFridge, false);
 		a_moveToDisplayCase1.setEffect(atMixer, false);
 		a_moveToDisplayCase1.setEffect(atOven, false);
+		a_moveToDisplayCase1.setEffect(atSink, false);
 		a_moveToDisplayCase1.setEffect(atCoolingRack, false);
 		a_moveToDisplayCase1.setEffect(atDisplayCase1, true);
 		a_moveToDisplayCase1.setEffect(atDisplayCase2, false);
@@ -768,21 +764,22 @@ std::vector<Action> MuffinRecipe::PutMuffinsInDisplayCaseByNumFromOven(State _in
 
 
 		Action a_placeMuffinsInDisplayCase1 = Action("place muffins in display case 1", pricey);
-		a_placeMuffinsInDisplayCase1.setPrecondition(_atDisplayCaseNum, true);
-		a_placeMuffinsInDisplayCase1.setPrecondition(_displayCaseNumFull, false);
+		a_placeMuffinsInDisplayCase1.setPrecondition(atDisplayCase1, true);
+		a_placeMuffinsInDisplayCase1.setPrecondition(display_case_1_is_full, false);
 		a_placeMuffinsInDisplayCase1.setPrecondition(muffin_tray_contains_muffins, true);
 		a_placeMuffinsInDisplayCase1.setEffect(muffin_tray_contains_muffins, false);
-		a_placeMuffinsInDisplayCase1.setEffect(_displayCaseNumFull, true);
+		a_placeMuffinsInDisplayCase1.setEffect(display_case_1_is_full, true);
 		actions.push_back(a_placeMuffinsInDisplayCase1);
 	}
 	else if (_displayNum == 2) 
 	{
 		Action a_moveToDisplayCase2 = Action("move to display case 2", pricey);
-		a_moveToDisplayCase2.setPrecondition(_atDisplayCaseNum, false);
+		a_moveToDisplayCase2.setPrecondition(atDisplayCase2, false);
 		a_moveToDisplayCase2.setEffect(atPantry, false);
 		a_moveToDisplayCase2.setEffect(atFridge, false);
 		a_moveToDisplayCase2.setEffect(atMixer, false);
 		a_moveToDisplayCase2.setEffect(atOven, false);
+		a_moveToDisplayCase2.setEffect(atSink, false);
 		a_moveToDisplayCase2.setEffect(atCoolingRack, false);
 		a_moveToDisplayCase2.setEffect(atDisplayCase1, false);
 		a_moveToDisplayCase2.setEffect(atDisplayCase2, true);
@@ -791,21 +788,22 @@ std::vector<Action> MuffinRecipe::PutMuffinsInDisplayCaseByNumFromOven(State _in
 
 
 		Action a_placeMuffinsInDisplayCase2 = Action("place muffins in display case 2", pricey);
-		a_placeMuffinsInDisplayCase2.setPrecondition(_atDisplayCaseNum, true);
-		a_placeMuffinsInDisplayCase2.setPrecondition(_displayCaseNumFull, false);
+		a_placeMuffinsInDisplayCase2.setPrecondition(atDisplayCase2, true);
+		a_placeMuffinsInDisplayCase2.setPrecondition(display_case_2_is_full, false);
 		a_placeMuffinsInDisplayCase2.setPrecondition(muffin_tray_contains_muffins, true);
 		a_placeMuffinsInDisplayCase2.setEffect(muffin_tray_contains_muffins, false);
-		a_placeMuffinsInDisplayCase2.setEffect(_displayCaseNumFull, true);
+		a_placeMuffinsInDisplayCase2.setEffect(display_case_2_is_full, true);
 		actions.push_back(a_placeMuffinsInDisplayCase2);
 	}
 	else if (_displayNum == 3) 
 	{
 		Action a_moveToDisplayCase3 = Action("move to display case 3", pricey);
-		a_moveToDisplayCase3.setPrecondition(_atDisplayCaseNum, false);
+		a_moveToDisplayCase3.setPrecondition(atDisplayCase3, false);
 		a_moveToDisplayCase3.setEffect(atPantry, false);
 		a_moveToDisplayCase3.setEffect(atFridge, false);
 		a_moveToDisplayCase3.setEffect(atMixer, false);
 		a_moveToDisplayCase3.setEffect(atOven, false);
+		a_moveToDisplayCase3.setEffect(atSink, false);
 		a_moveToDisplayCase3.setEffect(atCoolingRack, false);
 		a_moveToDisplayCase3.setEffect(atDisplayCase1, false);
 		a_moveToDisplayCase3.setEffect(atDisplayCase2, false);
@@ -814,11 +812,11 @@ std::vector<Action> MuffinRecipe::PutMuffinsInDisplayCaseByNumFromOven(State _in
 
 
 		Action a_placeMuffinsInDisplayCase3 = Action("place muffins in display case 3", pricey);
-		a_placeMuffinsInDisplayCase3.setPrecondition(_atDisplayCaseNum, true);
-		a_placeMuffinsInDisplayCase3.setPrecondition(_displayCaseNumFull, false);
+		a_placeMuffinsInDisplayCase3.setPrecondition(atDisplayCase3, true);
+		a_placeMuffinsInDisplayCase3.setPrecondition(display_case_3_is_full, false);
 		a_placeMuffinsInDisplayCase3.setPrecondition(muffin_tray_contains_muffins, true);
 		a_placeMuffinsInDisplayCase3.setEffect(muffin_tray_contains_muffins, false);
-		a_placeMuffinsInDisplayCase3.setEffect(_displayCaseNumFull, true);
+		a_placeMuffinsInDisplayCase3.setEffect(display_case_3_is_full, true);
 		actions.push_back(a_placeMuffinsInDisplayCase3);
 	}
 
@@ -827,27 +825,30 @@ std::vector<Action> MuffinRecipe::PutMuffinsInDisplayCaseByNumFromOven(State _in
 	// variables required to meet goal
 
 	State s_goalState;
-	s_goalState.setVariableById(_displayCaseNumFull, true);
-	s_goalState.m_fPriorityLevel = 100;
+	if (_atDisplayCaseNum == 1) 
+	{
+		s_goalState.setVariableById(display_case_1_is_full, true);
+		s_goalState.m_fPriorityLevel = 100;
+	}
+	else if (_atDisplayCaseNum == 2) 
+	{
+		s_goalState.setVariableById(display_case_2_is_full, true);
+		s_goalState.m_fPriorityLevel = 100;
 
-	// starting variables
+	}
+	else if (_atDisplayCaseNum == 3) 
+	{
+		s_goalState.setVariableById(display_case_3_is_full, true);
+		s_goalState.m_fPriorityLevel = 100;
+	}
 
-	State s_initialState;
-	s_initialState.setVariableById(muffin_tray_contains_muffins, _initialState.getVariableById(muffin_tray_contains_muffins));
-	s_initialState.setVariableById(_displayCaseNumFull, _initialState.getVariableById(_displayCaseNumFull));
-	s_initialState.setVariableById(atPantry, _initialState.getVariableById(atPantry));
-	s_initialState.setVariableById(atFridge, _initialState.getVariableById(atFridge));
-	s_initialState.setVariableById(atMixer, _initialState.getVariableById(atMixer));
-	s_initialState.setVariableById(atOven, _initialState.getVariableById(atOven));
-	s_initialState.setVariableById(atCoolingRack, _initialState.getVariableById(atCoolingRack));
-	s_initialState.setVariableById(_atDisplayCaseNum, _initialState.getVariableById(_atDisplayCaseNum));
 
 
 	// A* planner
 	Planner aStarPlanner;
 	try
 	{
-		std::vector<Action> the_plan = aStarPlanner.plan(s_initialState, s_goalState, actions);
+		std::vector<Action> the_plan = aStarPlanner.plan(_initialState, s_goalState, actions);
 		std::vector<Action> steps;
 
 		for (std::vector<Action>::reverse_iterator rit = the_plan.rbegin(); rit != the_plan.rend(); ++rit) {
@@ -880,6 +881,7 @@ std::vector<Action> MuffinRecipe::PutMuffinsInCoolingRackByNum(State _initialSta
 	a_moveToCoolingRack.setEffect(atPantry, false);
 	a_moveToCoolingRack.setEffect(atFridge, false);
 	a_moveToCoolingRack.setEffect(atMixer, false);
+	a_moveToCoolingRack.setEffect(atSink, false);
 	a_moveToCoolingRack.setEffect(atOven, false);
 	a_moveToCoolingRack.setEffect(atCoolingRack, true);
 	a_moveToCoolingRack.setEffect(atDisplayCase1, false);
@@ -922,22 +924,12 @@ std::vector<Action> MuffinRecipe::PutMuffinsInCoolingRackByNum(State _initialSta
 	s_goalState.setVariableById(_coolingRackNumFull, true);
 	s_goalState.m_fPriorityLevel = 100;
 
-	// starting variables
-
-	State s_initialState;
-	s_initialState.setVariableById(muffin_tray_contains_muffins, _initialState.getVariableById(muffin_tray_contains_muffins));
-	s_initialState.setVariableById(_coolingRackNumFull, _initialState.getVariableById(_coolingRackNumFull));
-	s_initialState.setVariableById(atPantry, _initialState.getVariableById(atPantry));
-	s_initialState.setVariableById(atFridge, _initialState.getVariableById(atFridge));
-	s_initialState.setVariableById(atMixer, _initialState.getVariableById(atMixer));
-	s_initialState.setVariableById(atOven, _initialState.getVariableById(atOven));
-	s_initialState.setVariableById(atCoolingRack, _initialState.getVariableById(atCoolingRack));
 
 	// A* planner
 	Planner aStarPlanner;
 	try
 	{
-		std::vector<Action> the_plan = aStarPlanner.plan(s_initialState, s_goalState, actions);
+		std::vector<Action> the_plan = aStarPlanner.plan(_initialState, s_goalState, actions);
 		std::vector<Action> steps;
 
 		for (std::vector<Action>::reverse_iterator rit = the_plan.rbegin(); rit != the_plan.rend(); ++rit) {
@@ -955,7 +947,6 @@ std::vector<Action> MuffinRecipe::PutMuffinsInCoolingRackByNum(State _initialSta
 	return std::vector<Action>();
 }
 
-
 std::vector<Action> MuffinRecipe::GetMuffinRecipe() {
 
 	std::vector<Action> basic_plan = BasicPlan(currentWorldState);
@@ -964,104 +955,110 @@ std::vector<Action> MuffinRecipe::GetMuffinRecipe() {
 	State tempWorldState = currentWorldState;
 	for (auto& action : basic_plan)
 	{
+		std::cout << "\n\n";
 		if (action.getName() == m_cMakeMuffinBatter) {
 			std::vector<Action> steps = MakeMuffinBatter(tempWorldState);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
+			std::cout << m_cMakeMuffinBatter << std::endl;
 		}
 		if (action.getName() == m_cBakeMuffinsInOven) {
 			std::vector<Action> steps = BakeMuffinsInOven(tempWorldState);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
+			std::cout << m_cBakeMuffinsInOven << std::endl;
 		}
 		if (action.getName() == m_cPutMuffinsOnRack1) {
 			std::vector<Action> steps = PutMuffinsInCoolingRackByNum(tempWorldState, cooling_rack_1_is_full, 1);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
+			std::cout << m_cPutMuffinsOnRack1 << std::endl;
 		}
 		if (action.getName() == m_cPutMuffinsOnRack2) {
 			std::vector<Action> steps = PutMuffinsInCoolingRackByNum(tempWorldState, cooling_rack_2_is_full, 2);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutMuffinsOnRack2 << std::endl;
 		}
 		if (action.getName() == m_cPutMuffinsOnRack3) {
 			std::vector<Action> steps = PutMuffinsInCoolingRackByNum(tempWorldState, cooling_rack_3_is_full, 3);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutMuffinsOnRack3 << std::endl;
 		}
 		if (action.getName() == m_cPutWarmMuffinsInDisplay1) {
 			std::vector<Action> steps = PutMuffinsInDisplayCaseByNumFromOven(tempWorldState, display_case_1_is_full, atDisplayCase1, 1);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutWarmMuffinsInDisplay1 << std::endl;
 		}
 		if (action.getName() == m_cPutWarmMuffinsInDisplay2) {
 			std::vector<Action> steps = PutMuffinsInDisplayCaseByNumFromOven(tempWorldState, display_case_2_is_full, atDisplayCase2, 2);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay3FromRack3 << std::endl;
 		}
 		if (action.getName() == m_cPutWarmMuffinsInDisplay3) {
 			std::vector<Action> steps = PutMuffinsInDisplayCaseByNumFromOven(tempWorldState, display_case_3_is_full, atDisplayCase3, 3);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutWarmMuffinsInDisplay3 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay1FromRack1) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_1_is_full, 1, display_case_1_is_full, atDisplayCase1, 1);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay1FromRack1 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay1FromRack2) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_2_is_full, 2, display_case_1_is_full, atDisplayCase1, 1);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay1FromRack2 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay1FromRack3) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_3_is_full, 3, display_case_1_is_full, atDisplayCase1, 1);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay1FromRack3 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay2FromRack1) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_1_is_full, 1, display_case_2_is_full, atDisplayCase2, 2);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay2FromRack1 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay2FromRack2) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_2_is_full, 2, display_case_2_is_full, atDisplayCase2, 2);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay2FromRack2 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay2FromRack3) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_3_is_full, 3, display_case_2_is_full, atDisplayCase2, 2);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay2FromRack3 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay3FromRack1) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_1_is_full, 1, display_case_3_is_full, atDisplayCase3, 3);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay3FromRack1 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay3FromRack2) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_2_is_full, 2, display_case_3_is_full, atDisplayCase3, 3);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
-
+			std::cout << m_cPutColdMuffinsInDisplay3FromRack2 << std::endl;
 		}
 		if (action.getName() == m_cPutColdMuffinsInDisplay3FromRack3) {
 			std::vector<Action> steps = PlaceMuffinsInDisplayCaseFromRackByNum(tempWorldState, cooling_rack_3_is_full, 3, display_case_3_is_full, atDisplayCase3, 3);
 			tempWorldState = PerformActionsOnState(steps, tempWorldState);
 			complete_plan.insert(complete_plan.end(), steps.begin(), steps.end());
+			std::cout << m_cPutColdMuffinsInDisplay3FromRack3 << std::endl;
 		}
+		std::cout << "\n";
 	}
 
 	return complete_plan;
@@ -1076,6 +1073,35 @@ int MuffinRecipe::GetTaskCost(std::vector<Action> _actions)
 		planCost += action.getCost();
 	}
 	return planCost;
+}
+
+bool MuffinRecipe::DoPlansMatch(std::vector<Action> _actionsA, std::vector<Action> _actionsB)
+{
+	if (_actionsA.empty() && _actionsB.empty()) {
+		std::cout << "both plans match because they're both empty\n";
+		return true;
+	}
+	if (_actionsA.empty()) {
+		std::cout << "plan a is empty\n";
+		return false;
+	}
+	if (_actionsB.empty()) {
+		std::cout << "plan b is empty\n";
+		return false;
+	}
+
+	int a_to_b_margin = -1;
+	int smaller_num = _actionsA.size() + a_to_b_margin < _actionsB.size() ? _actionsA.size() : _actionsB.size();
+
+	for (int i = 0; i < smaller_num; i++) {
+		if (_actionsA.at(i+ a_to_b_margin).getName() != _actionsB.at(i).getName()) {
+			std::cout << "element " << i+ a_to_b_margin << " of plan a, does not have the same name as element " << i << " of plan b. plan a, element " << i+ a_to_b_margin << ": " << _actionsA.at(i+ a_to_b_margin).getName() << "!= plan b, element " << i << ": " << _actionsB.at(i).getName() << std::endl;
+			return false;
+		}
+	}
+
+	std::cout << "the plans match!\n";
+	return true;
 }
 
 

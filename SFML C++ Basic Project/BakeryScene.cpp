@@ -5,7 +5,6 @@ BakeryScene::BakeryScene()
 	this->m_RenderWindow = nullptr;
 	this->m_VideoMode = nullptr;
 	this->m_cTitle = "";
-	this->currentWorldState = nullptr;
 	this->m_textBox = nullptr;
 	this->m_nextStepsTextBox = nullptr;
 }
@@ -241,8 +240,6 @@ void BakeryScene::init(sf::RenderWindow* _window, sf::VideoMode* _videoMode)
 	this->m_iDisplayCase1MuffinCount = 0;
 	this->m_iDisplayCase2MuffinCount = 0;
 	this->m_iDisplayCase3MuffinCount = 0;
-
-	UpdateRecipe();
 }
 
 void BakeryScene::UpdateRecipe() {
@@ -264,14 +261,6 @@ void BakeryScene::UpdateRecipe() {
 		this->m_vaRecipe.insert(this->m_vaRecipe.begin(), buffer_action);
 
 		m_vsTaskNames.push_back("wait for next goal");
-
-		//std::cout << "Make Muffins:\n";
-		//int i = 0;
-		//for (auto& step : this->m_vaRecipe) {
-		//	std::cout << step.getName() << ", cost: " << step.getCost() << "\n";
-		//	i += step.getCost();
-		//}
-		//std::cout << "Total Cost: " << i << "\n";
 
 	}
 	else {
@@ -335,6 +324,12 @@ void BakeryScene::update(float _fDeltaTime, sf::Event* _event)
 			break;
 		}
 	}
+
+	// if there is no plan and all displays are empty, create a new plan
+	if (this->m_vaRecipe.empty() && (m_iDisplayCase1MuffinCount <= 0 || m_iDisplayCase2MuffinCount <= 0 || m_iDisplayCase3MuffinCount <= 0))
+	{
+		UpdateRecipe();
+	}
 	
 	UpdateText();
 
@@ -347,11 +342,18 @@ void BakeryScene::update(float _fDeltaTime, sf::Event* _event)
 		UpdateTasks();
 		performNextTaskTimer = 0;
 
-		if (decreaseMuffinsTimer > 1.f) {
-			DecreaseMuffins();
+		if (decreaseMuffinsTimer > 2.f) {
 			decreaseMuffinsTimer = 0;
+			m_iDisplayCase1MuffinCount < 0 ? 0 : m_iDisplayCase1MuffinCount;
+			m_iDisplayCase2MuffinCount < 0 ? 0 : m_iDisplayCase2MuffinCount;
+			m_iDisplayCase3MuffinCount < 0 ? 0 : m_iDisplayCase3MuffinCount;
+			m_iDisplayCase1MuffinCount > 6 ? 6 : m_iDisplayCase1MuffinCount;
+			m_iDisplayCase2MuffinCount > 6 ? 6 : m_iDisplayCase2MuffinCount;
+			m_iDisplayCase3MuffinCount > 6 ? 6 : m_iDisplayCase3MuffinCount;
+			DecreaseMuffins();
 		}
 	}
+
 }
 
 // draws all the drawable objects in the scene
@@ -608,236 +610,297 @@ void BakeryScene::OpenPantry()
 {
 	gPantry->setTexture("Images\\pantry_open.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_open_pantry;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::ClosePantry()
 {
 	gPantry->setTexture("Images\\pantry_closed.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_close_pantry;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::OpenFridge()
 {
 	gFridge->setTexture("Images\\fridge_open.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_open_fridge;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::CloseFridge()
 {
 	gFridge->setTexture("Images\\fridge_closed.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_close_fridge;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::OpenOven()
 {
 	gOven->setTexture("Images\\oven_open.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_open_oven;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::CloseOven()
 {
 	gOven->setTexture("Images\\oven_closed.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_close_oven;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::TurnOvenOff()
 {
 	this->m_sCurrentTask = m_c_turn_oven_off;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::TurnOvenOn()
 {
 	this->m_sCurrentTask = m_c_turn_oven_on;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::TurnSinkOff()
 {
 	gSink->setTexture("Images\\sink_tap_off.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_turn_sink_off;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::TurnSinkOn()
 {
 	gSink->setTexture("Images\\sink_tap_on.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_turn_sink_on;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::CleanMixer()
 {
 	gMixer->setTexture("Images\\whisk_off.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_clean_mixer;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::CleanMuffinTray()
 {
 	this->m_sCurrentTask = m_c_clean_muffin_tray;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::GetColdIngredients()
 {
 	this->m_sCurrentTask = m_c_get_cold_ingredients;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::GetPantryIngredients()
 {
 	this->m_sCurrentTask = m_c_get_pantry_ingredients;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MixIngredients()
 {
 	gMixer->setTexture("Images\\whisk_on.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_mix_ingredients;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::PourBatterIntoTray()
 {
 	gMixer->setTexture("Images\\whisk_off.png", this->blockWidth, this->blockHeight, false);
 	this->m_sCurrentTask = m_c_pour_batter_into_tray;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::PutMuffinTrayIntoOven()
 {
 	this->m_sCurrentTask = m_c_put_muffin_tray_into_oven;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::BakeMuffins()
 {
 	this->m_sCurrentTask = m_c_bake_muffins;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::RemoveMuffinTrayFromOven()
 {
 	this->m_sCurrentTask = m_c_remove_muffin_tray_from_oven;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToCoolingRack()
 {
 	this->gBaker->setPosition(this->m_iCoolingRackPos);
 	this->m_sCurrentTask = m_c_move_to_cooling_rack;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToDisplayCase1()
 {
 	this->gBaker->setPosition(this->m_iDisplayCase1Pos);
 	this->m_sCurrentTask = m_c_move_to_display_case_1;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToDisplayCase2()
 {
 	this->gBaker->setPosition(this->m_iDisplayCase2Pos);
 	this->m_sCurrentTask = m_c_move_to_display_case_2;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToDisplayCase3()
 {
 	this->gBaker->setPosition(this->m_iDisplayCase3Pos);
 	this->m_sCurrentTask = m_c_move_to_display_case_3;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToFridge()
 {
 	this->gBaker->setPosition(this->m_iFridgePos);
 	this->m_sCurrentTask = m_c_move_to_fridge;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToMixer()
 {
 	this->gBaker->setPosition(this->m_iMixerPos);
 	this->m_sCurrentTask = m_c_move_to_mixer;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToOven()
 {
 	this->gBaker->setPosition(this->m_iOvenPos);
 	this->m_sCurrentTask = m_c_move_to_oven;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToPantry()
 {
 	this->gBaker->setPosition(this->m_iPantryPos);
 	this->m_sCurrentTask = m_c_move_to_pantry;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::MoveToSink()
 {
 	this->gBaker->setPosition(this->m_iSinkPos);
 	this->m_sCurrentTask = m_c_move_to_sink;
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::PlaceMuffinsInDisplayCase1()
 {
-	//this->gBaker->setPosition(this->m_iDisplayCase1Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_1;
 	m_iDisplayCase1MuffinCount = 6;
 	UpdateDisplayCase1();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::PlaceMuffinsInDisplayCase2()
 {
-	//this->gBaker->setPosition(this->m_iDisplayCase2Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_2;
 	m_iDisplayCase2MuffinCount = 6;
 	UpdateDisplayCase2();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::PlaceMuffinsInDisplayCase3()
 {
-	//this->gBaker->setPosition(this->m_iDisplayCase3Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_3;
 	m_iDisplayCase3MuffinCount = 6;
 	UpdateDisplayCase3();
+	UpdateCurrentWorldState();
+}
+
+float BakeryScene::RandomRange(int min, int max) {
+
+	int n = max - min + 1;
+	int remainder = RAND_MAX % n;
+	int x;
+
+	do {
+		x = rand();
+	} while (x >= RAND_MAX - remainder);
+
+	float random = static_cast<float>(min + x % n);
+	return random;
 }
 
 void BakeryScene::DecreaseMuffins() 
 {
-	srand(time(NULL));
-	int randNum = (rand() % 3) + 1;
+	int randNum = RandomRange(1,3);
 
 	if (randNum == 1) 
 	{
 		RemoveAMuffinFromDisplayCase1();
+		if (m_iDisplayCase1MuffinCount <= 0) {
+			if (this->m_MuffinRecipe->currentWorldState.getVariableById(this->m_MuffinRecipe->display_case_1_is_full) != false) 
+			{
+				this->m_MuffinRecipe->currentWorldState.setVariableById(this->m_MuffinRecipe->display_case_1_is_full, false);
+				UpdatePlan();
+			}
+		}
 	}
-
-	if (randNum == 2) 
+	else if (randNum == 2)
 	{
 		RemoveAMuffinFromDisplayCase2();
+		if (m_iDisplayCase2MuffinCount <= 0) {
+			if (this->m_MuffinRecipe->currentWorldState.getVariableById(this->m_MuffinRecipe->display_case_2_is_full) != false) 
+			{
+				this->m_MuffinRecipe->currentWorldState.setVariableById(this->m_MuffinRecipe->display_case_2_is_full, false);
+				UpdatePlan();
+			}
+		}
 	}
-
-	if (randNum == 3) 
+	else if (randNum == 3)
 	{
 		RemoveAMuffinFromDisplayCase3();
+		if (m_iDisplayCase3MuffinCount <= 0) {
+			if (this->m_MuffinRecipe->currentWorldState.getVariableById(this->m_MuffinRecipe->display_case_3_is_full) != false) 
+			{
+				this->m_MuffinRecipe->currentWorldState.setVariableById(this->m_MuffinRecipe->display_case_3_is_full, false);
+				UpdatePlan();
+			}
+		}
 	}
+
 }
 
 void BakeryScene::RemoveAMuffinFromDisplayCase1()
 {
-	//this->gBaker->setPosition(this->m_iDisplayCase1Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_1;
-	if (m_iDisplayCase1MuffinCount >= 0) {
+	if (m_iDisplayCase1MuffinCount > 0) {
 		m_iDisplayCase1MuffinCount -= 1;
 		std::cout << "number of muffins in display: " << m_iDisplayCase1MuffinCount << std::endl;
 	}
 	UpdateDisplayCase1();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::RemoveAMuffinFromDisplayCase2()
 {
-	//this->gBaker->setPosition(this->m_iDisplayCase2Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_2;
-	if (m_iDisplayCase2MuffinCount >= 0) {
-		m_iDisplayCase2MuffinCount - 1;
+	if (m_iDisplayCase2MuffinCount > 0) {
+		m_iDisplayCase2MuffinCount -= 1;
 	}
 	UpdateDisplayCase2();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::RemoveAMuffinFromDisplayCase3()
 {
-	//this->gBaker->setPosition(this->m_iDisplayCase3Pos);
 	this->m_sCurrentTask = m_c_place_muffins_in_display_case_3;
 	if (m_iDisplayCase3MuffinCount > 0) {
 		m_iDisplayCase3MuffinCount -= 1;
 	}
 	UpdateDisplayCase3();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::UpdateDisplayCase1()
@@ -935,6 +998,7 @@ void BakeryScene::PlaceMuffinsOnCoolingRack1()
 	this->m_sCurrentTask = m_c_place_muffins_on_cooling_rack_1;
 	m_bCoolingRack1Full = true;
 	UpdateCoolingRack();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::PlaceMuffinsOnCoolingRack2()
@@ -942,6 +1006,7 @@ void BakeryScene::PlaceMuffinsOnCoolingRack2()
 	this->m_sCurrentTask = m_c_place_muffins_on_cooling_rack_2;
 	m_bCoolingRack2Full = true;
 	UpdateCoolingRack();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::PlaceMuffinsOnCoolingRack3()
@@ -949,6 +1014,7 @@ void BakeryScene::PlaceMuffinsOnCoolingRack3()
 	this->m_sCurrentTask = m_c_place_muffins_on_cooling_rack_3;
 	m_bCoolingRack3Full = true; 
 	UpdateCoolingRack();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::RemoveMuffinsFromCoolingRack1()
@@ -956,6 +1022,7 @@ void BakeryScene::RemoveMuffinsFromCoolingRack1()
 	this->m_sCurrentTask = m_c_remove_muffins_from_cooling_rack_1;
 	m_bCoolingRack3Full = false;
 	UpdateCoolingRack();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::RemoveMuffinsFromCoolingRack2()
@@ -963,6 +1030,7 @@ void BakeryScene::RemoveMuffinsFromCoolingRack2()
 	this->m_sCurrentTask = m_c_remove_muffins_from_cooling_rack_2;
 	m_bCoolingRack3Full = false;
 	UpdateCoolingRack();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::RemoveMuffinsFromCoolingRack3()
@@ -970,6 +1038,7 @@ void BakeryScene::RemoveMuffinsFromCoolingRack3()
 	this->m_sCurrentTask = m_c_remove_muffins_from_cooling_rack_3;
 	m_bCoolingRack3Full = false;
 	UpdateCoolingRack();
+	UpdateCurrentWorldState();
 }
 
 void BakeryScene::UpdateCoolingRack()
@@ -1021,6 +1090,54 @@ void BakeryScene::UpdateText() {
 	}
 }
 
+void BakeryScene::UpdateCurrentWorldState() 
+{
+	if (!this->m_vaRecipe.empty()) {
+		std::vector<Action> actions;
+		actions.push_back(this->m_vaRecipe.front());
+		this->m_MuffinRecipe->currentWorldState = this->m_MuffinRecipe->PerformActionsOnState(actions, this->m_MuffinRecipe->currentWorldState);
+	}
+}
+
+void BakeryScene::UpdatePlan() 
+{
+
+	//std::cout << "\ncurrentWorldState\n";
+	//std::cout << "cooling rack 1 full? : " << this->m_MuffinRecipe->currentWorldState.getVariableById(24) << std::endl;
+	//std::cout << "cooling rack 2 full? : " << this->m_MuffinRecipe->currentWorldState.getVariableById(25) << std::endl;
+	//std::cout << "cooling rack 3 full? : " << this->m_MuffinRecipe->currentWorldState.getVariableById(26) << std::endl;
+	//std::cout << "display case 1 full? : " << this->m_MuffinRecipe->currentWorldState.getVariableById(27) << std::endl;
+	//std::cout << "display case 2 full? : " << this->m_MuffinRecipe->currentWorldState.getVariableById(28) << std::endl;
+	//std::cout << "display case 3 full? : " << this->m_MuffinRecipe->currentWorldState.getVariableById(29) << std::endl;
+
+	//UpdateRecipe();
+
+
+	if (!this->m_vsTaskNames.empty()) {
+		this->m_vsTaskNames.clear(); // make sure to empty task names list
+	}
+
+	if (!this->m_vaRecipe.empty()) {
+
+		// so that I can have the action name show up before the action
+		Action buffer_action(this->m_vaRecipe.front().getName(), this->m_vaRecipe.front().getCost());
+		this->m_vaRecipe = this->m_MuffinRecipe->GetMuffinRecipe();
+		this->m_vaRecipe.insert(this->m_vaRecipe.begin(), buffer_action);
+
+		this->m_sCurrentTask = this->m_vaRecipe.front().getName();
+
+		for (auto& action : this->m_vaRecipe) {
+			m_vsTaskNames.push_back(action.getName());
+		}
+
+		m_vsTaskNames.push_back("wait for next goal");
+	}
+	else {
+		this->m_sCurrentTask = "";
+	}
+}
+
+
 void BakeryScene::UpdateTasks() {
 
 
@@ -1066,7 +1183,10 @@ void BakeryScene::UpdateTasks() {
 		else if (temp == m_c_turn_sink_off){ TurnSinkOff(); }
 		else if (temp == m_c_turn_sink_on){ TurnSinkOn(); }
 
+		std::vector<Action> tempPlan;
+		tempPlan.push_back(this->m_vaRecipe.front());
 		this->m_vaRecipe.erase(this->m_vaRecipe.begin());
 		this->m_vsTaskNames.erase(this->m_vsTaskNames.begin());
+
 	}
 }

@@ -92,6 +92,23 @@ std::vector<Action> Planner::plan(const State& _startState, const State& _goalSt
     if (_startState.matches(_goalState))
     {
         std::cout << "startState is the same as the goalState \n";
+
+        std::cout << "\n_startState: " << _startState.m_cName << std::endl;
+        for (auto& var : _startState.m_mVariables)
+        {
+            std::cout << "int: " << var.first << ", value: " << var.second << std::endl;
+        }
+
+        std::cout << "\n_goalState: " << _goalState.m_cName << std::endl;
+        for (auto& var : _goalState.m_mVariables)
+        {
+            std::cout << "int: " << var.first << ", value: " << var.second << std::endl;
+        }
+
+        if (_goalState.m_mVariables.empty()) {
+            std::cout << "goal is empty of variables\n";
+        }
+
         return std::vector<Action>();
     }
 

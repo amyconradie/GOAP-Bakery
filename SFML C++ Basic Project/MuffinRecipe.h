@@ -87,8 +87,8 @@ private:
 
 	// costs
 
-	int cheap = 5;
-	int pricey = 15;
+	int cheap = 10;
+	int pricey = 20;
 	int expensive = 30;
 
 
@@ -144,12 +144,6 @@ public:
 	MuffinRecipe();
 	~MuffinRecipe();
 
-	//std::vector<Action> MakeMuffins();
-	//int GetTaskCost(std::vector<Action> _actions);
-	//State PerformActionsOnState(std::vector<Action> _actions, State _initialState);
-	//void updateStateFromWorld(bool _bPantryOpen, bool _bFridgeOpen, bool _bOvenOpen, bool _bSinkOn, bool _bMixerOn, bool _bRack1Full, bool _bRack2Full, bool _bRack3Full, bool _bDisplay1Full, bool _bDisplay2Full, bool _bDisplay3Full);
-	//void setCurrentState(State _state);
-	//State getCurrentState();
 	State GetBeginningState();
 	std::vector<Action> BasicPlan(State _initialState);
 	std::vector<Action> MakeMuffinBatter(State _initialState);
@@ -160,10 +154,8 @@ public:
 	std::vector<Action> PutMuffinsInCoolingRackByNum(State _initialState, const int _coolingRackNumFull, int _rackCaseNum);
 	std::vector<Action> GetMuffinRecipe();
 	int GetTaskCost(std::vector<Action> _actions);
-	//std::vector<Action> RemoveMuffinsToDisplayCaseFromRackByNum(State _initialState, const int _coolingRackNumFull, const int _displayCaseNumFull, const int _atDisplayCaseNum);
-	////std::vector<Action> RemoveMuffinsToDisplayCaseFromRackByNum(State _initialState, const int _coolingRackNumFull, const int _displayCaseNumFull, const int _atDisplayCaseNum, int _displaycaseNum);
-	//std::vector<Action> PutMuffinsInDisplayCaseByNumFromOven(State _initialState, const int _displayCaseNumFull, const int _atDisplayCaseNum);
-	//std::vector<Action> PutMuffinsInCoolingRackByNum(State _initialState, const int _coolingRackNumFull);
+	bool DoPlansMatch(std::vector<Action> _actionsA, std::vector<Action> _actionsB);
+
 };
 
 #endif

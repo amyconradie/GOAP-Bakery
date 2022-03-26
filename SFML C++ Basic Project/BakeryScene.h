@@ -44,11 +44,13 @@ private:
 	unsigned int blockHeight;
 
 	std::vector<Action> m_vaRecipe;
+	//std::vector<Action> m_vaFullRecipe;
+	//std::vector<Action> m_vaPerformedActions;
 	std::vector<std::string> m_vsTaskNames;
 	MuffinRecipe* m_MuffinRecipe;
-	State* currentWorldState;
 	std::string m_sCurrentTask;
-	int muffinCount = 0;
+	//State* m_currentState;
+	//State* m_currentState;
 
 	sf::Vector2f m_iCoolingRackPos;
 	sf::Vector2f m_iMixerPos;
@@ -190,6 +192,7 @@ public:
 	void PlaceMuffinsInDisplayCase2();
 	void PlaceMuffinsInDisplayCase3();
 
+	float RandomRange(int min, int max);;
 	void DecreaseMuffins();
 
 	void RemoveAMuffinFromDisplayCase1();
@@ -211,6 +214,8 @@ public:
 	void UpdateCoolingRack();
 
 	void UpdateText();
+	void UpdateCurrentWorldState();
+	void UpdatePlan();
 	void UpdateTasks();
 };
 
