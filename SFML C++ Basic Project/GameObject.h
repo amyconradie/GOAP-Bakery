@@ -39,7 +39,7 @@ public:
 	// basic
 	//-------
 
-	void init(sf::RenderWindow* _renderWindow, unsigned int _iWidth, unsigned int _iHeight, sf::Color _color);
+	void init(sf::RenderWindow* _renderWindow, sf::Color _color, unsigned int _iWidth, unsigned int _iHeight);
 	void init(sf::RenderWindow* _renderWindow, const char* _cFileName, unsigned int _iWidth, unsigned int _iHeight, bool _bRepeated);
 	void update(sf::Event* event, float _fDeltaTime);
 	void render();
@@ -48,7 +48,7 @@ public:
 	// sprite
 	//--------
 
-	void setTexture(unsigned int _iWidth, unsigned int _iHeight, sf::Color _color);
+	void setTexture(sf::Color _color, unsigned int _iWidth, unsigned int _iHeight);
 	void setTexture(const char* _cFileName, unsigned int _iWidth, unsigned int _iHeight, bool _bRepeated);
 
 
